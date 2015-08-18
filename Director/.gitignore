@@ -1,4 +1,4 @@
 # Ignore everything in this directory
-asd.txt
+*
 # Except this file
-.gitignore*
+!.gitignore
