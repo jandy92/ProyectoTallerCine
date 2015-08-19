@@ -1,0 +1,21 @@
+INSERT INTO actor VALUES(1,"Robert Downey Jr.","1965-04--04","Hombre","");
+INSERT INTO actor VALUES(2,"Emma Stone ","1988-11-06","Mujer","");
+INSERT INTO actor VALUES(3,"Danny Trejo","1944-05-16","Hombre","");
+INSERT INTO actor VALUES(4,"Jennifer Aniston","1969-02-11","Mujer","");
+
+INSERT INTO director VALUES(1,"Joss Whedon","USA","1964-06-23","");
+INSERT INTO director VALUES(2,"James Cameron","Canada","1954-08-16","");
+INSERT INTO director VALUES(3,"Stanley Kubrick","USA","1928-07-26","1999-03-07");
+INSERT INTO director VALUES(4,"Alfred Hitchcock","UK","1899-08-13","1980-04-29");
+
+INSERT INTO pelicula VALUES(1,"Iron Man","2008-04-14","USA","Después de haber estado cautivo en una cueva afgana , un inventor crea una armadura para luchar contra el mal.",1);
+INSERT INTO pelicula VALUES(2,"The Amazing Spider-Man","2012-07-03","USA","Después de que Peter Parker es mordido por una araña genéticamente alterada , gana poderes de araña y se aventura para resolver la misteriosa muerte de su padre .",NULL);
+INSERT INTO pelicula VALUES(3,"Machete","2010-09-03","USA","Luego de ser traicionado por el hombre que lo contrató para asesinar a un senador de Texas , empieza una carniceria para acabar con su antiguo jefe.",NULL);
+INSERT INTO pelicula VALUES(4,"Just Go with It","2011-02-08","USA","En un viaje de fin de semana a Hawai , un cirujano plástico convence a su leal asistente para hacerse pasar por su divorciada esposa para encubrir una mentira a su nueva novia que es mucho mas joven.",NULL);
+
+INSERT INTO elenco VALUES("Tony Stark","Millonario e inventor de un traje con el que combatira el mal.",1,1);
+INSERT INTO elenco VALUES("Gwen Stacy","Novia de Pete Parker.",2,2);
+INSERT INTO elenco VALUES("Machete","Ex-agente federal de mexico, contratado para matar a un senador corrupto en Texas.",3,3);
+INSERT INTO elenco VALUES("Katherine","Asistente de Danny, lo acompaña a un viaje a Hawaii para encubrir una mentira.",4,4);
+
+
