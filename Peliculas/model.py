@@ -21,9 +21,25 @@ def filter_movie(actor):
              "(SELECT id FROM actor "
              "WHERE nombre="+actor
          )
-    print(query)
+    
+    result = c.execute(query)
+
+    movies = result.fetchall()
+    return movies
+def actor_count(id_p):
+    
+    con = connect()
+    c = con.cursor()
+    id_p=str(id_p)
+    id_p="'"+id_p+"'"
+  
+    query = ("SELECT * FROM elenco "
+             "WHERE pelicula_id ="+id_p
+         )
+    
     result = c.execute(query)
     movies = result.fetchall()
+     #recordar cambiar el nombre del retorno
     return movies
 def delete_movie(nombre):
     

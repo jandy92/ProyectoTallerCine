@@ -22,16 +22,16 @@ class Movies(QtGui.QMainWindow):
         self.load_movies()
         self.show()
         self.signals()
-       
-
+        self.ui.label_reparto.setText("")
+        self.ui.label_imagen.setText("")
+        self.ui.label_desc.setText("")
+        self.ui.label_4.setText("Cantidad de actores: ")
     def signals(self):
         self.ui.grilla.clicked.connect(self.show_poster) #table_movies es temporal
         self.ui.btn_eliminar.clicked.connect(self.delete)
         self.ui.btn_filtro.clicked.connect(self.load_filtered_movies)
-        self.ui.btn_crear.clicked.connect(self.prueba)
-    def prueba(self):
-        asd=self.ui.filtro_actor.text()
-        print(asd)
+       
+
     def delete(self):
         index=self.ui.grilla.currentIndex()
         data = self.ui.grilla.model()
@@ -40,6 +40,7 @@ class Movies(QtGui.QMainWindow):
         self.load_movies()
         return
     def show_poster(self, index):
+        
         index = index if index is not None\
             else self.ui.grilla.currentIndex()
         if index.row() == -1:
@@ -48,21 +49,31 @@ class Movies(QtGui.QMainWindow):
                 u"Información",
                 u"Por favor seleccione una orden de trabajo.")
             return
+      
         data = self.ui.grilla.model()
         mov = data.item(index.row(), 0).mov
-
+        actores=self.sum_actores(mov["id"])
+        actores=str(actores)
+        self.ui.label_reparto.setText(actores)
         # Colocamos la información en los labels
   #      self.ui.lbl_stars.setText(mov["stars"])
         self.ui.label_desc.setText(mov["descripcion"])  #recordar cambiar el label.setWordWrap True para reparto :D
         # Ahora la imagen
   #      img = QtGui.QPixmap(str(mov['poster']))  #str[mov[poster]] da el nombre del archivo para luego usarlo como una imagen
   #      self.ui.lbl_image.setPixmap(img)
-
+    def sum_actores(self,id_p):  #recorre la query como diccionario para luego contar los actores
+        contador_actores=0
+        movies = model.actor_count(id_p) #cambiar el nombre del model dependiendo de lo que se necesite 
+        for i, mov in enumerate(movies):
+            contador_actores=contador_actores+1
+        
+        return(contador_actores)
     def load_movies(self):
         movies = model.get_movies() #cambiar el nombre del model dependiendo de lo que se necesite
         rows = len(movies)
         data = QtGui.QStandardItemModel(
             rows, len(self.table_columns))
+        
         self.ui.grilla.setModel(data)
         self.ui.grilla.horizontalHeader().setResizeMode(
             0, self.ui.grilla.horizontalHeader().Stretch)
