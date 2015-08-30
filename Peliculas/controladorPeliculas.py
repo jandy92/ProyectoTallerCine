@@ -81,9 +81,16 @@ class Movies(QtGui.QMainWindow):
             # Parametros ocultos
             data.item(i).mov = mov
     def load_filtered_movies(self):
+        
         movies = model.filter_movie()
         
         rows = len(movies)
+        if rows == 0:
+            QtGui.QMessageBox.information(
+                None,
+                u"Información",
+                u"No se encontro nigun actor en las peliculas.")
+            return
         data = QtGui.QStandardItemModel(
             rows, len(self.table_columns))
         self.ui.grilla.setModel(data)

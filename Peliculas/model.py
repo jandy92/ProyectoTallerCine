@@ -16,7 +16,7 @@ def filter_movie():
     actor="'"+actor+"'))"
   
     query = ("SELECT * FROM pelicula "
-             "WHERE ID IN (SELECT actor_id FROM elenco "
+             "WHERE ID IN (SELECT pelicula_id FROM elenco "
              "WHERE actor_id IN "
              "(SELECT id FROM actor "
              "WHERE nombre="+actor
