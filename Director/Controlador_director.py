@@ -19,9 +19,12 @@ class Director(QtGui.QMainWindow):
         self.cargar_directores();
         self.show()
         self.signals()
+               
     
     def signals(self):
         self.ui.grilla.clicked.connect(self.mostrar_imagen)
+        self.ui.eliminarDirector.clicked.connect(self.elimina)
+
     def cargar_directores(self):
         directores=Modelo_director.obtener_directores()
         filas=len(directores)
@@ -57,7 +60,16 @@ class Director(QtGui.QMainWindow):
         img = QtGui.QPixmap(str(dire['imagen']))
         #print(str(dire['imagen'])[1:])
         self.ui.imagen.setPixmap(img)
-            
+
+    def elimina(self):
+        index =self.ui.grilla.currentIndex()
+        data = self.ui.grilla.model()
+        dire = data.item(index.row(),0).dire
+        iD = str(dire['id'])
+        Modelo_director.borrar(iD);
+        self.cargar_directores();
+        #print(str(dire['imagen'])[1:])
+        #self.ui.imagen.setPixmap(img)
 
 
 if __name__ == '__main__':
