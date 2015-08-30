@@ -30,15 +30,17 @@ class Director(QtGui.QMainWindow):
         for col, h in enumerate(self.table_columns):
             data.setHeaderData(col, QtCore.Qt.Horizontal, h[0])
             self.ui.grilla.setColumnWidth(col, h[1])
-            """
-        for i, director in enumerate(Director):
-            filas = [director["nombre"], director["pais"], director["fecha_nacimiento"],director["fecha_defuncion"]]
+            
+        for i, dire in enumerate(directores):
+            filas = [
+                dire["nombre"], dire["pais"],
+                dire["fecha_nacimiento"],dire["fecha_defuncion"]]
             for j, field in enumerate(filas):
                 index = data.index(i, j, QtCore.QModelIndex())
                 data.setData(index, field)
             # Parametros ocultos
-            data.item(i).director = director
-            """
+            data.item(i).dire = dire
+            
 
 
 if __name__ == '__main__':
