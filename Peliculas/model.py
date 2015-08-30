@@ -8,21 +8,20 @@ def connect():
     con = sqlite3.connect('../ProyectoCine.db')
     con.row_factory = sqlite3.Row
     return con
-def filter_movie(actor):
+def filter_movie():
     
     con = connect()
     c = con.cursor()
-
-    actor="'"+actor+"'"
-    actor="WHERE nombre="+actor
-    
-   
-    
-    query = (
-        "SELECT FROM elenco "
-        "WHERE id IN "
-        "(SELECT id FROM actor "
-        +actor)
+    actor="Danny Trejo"
+    actor="'"+actor+"'))"
+  
+    query = ("SELECT * FROM pelicula "
+             "WHERE ID IN (SELECT actor_id FROM elenco "
+             "WHERE actor_id IN "
+             "(SELECT id FROM actor "
+             "WHERE nombre="+actor
+         )
+    print(query)
     result = c.execute(query)
     movies = result.fetchall()
     return movies
@@ -31,7 +30,10 @@ def delete_movie(nombre):
     con = connect()
     c = con.cursor()
     nombre="'"+nombre+"'"
-    nombre="WHERE nombre="+nombre   
+    nombre="WHERE nombre="+nombre
+    
+    print(nombre)
+    
     query = (
         "DELETE FROM pelicula "
         +nombre)

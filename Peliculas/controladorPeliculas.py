@@ -22,11 +22,16 @@ class Movies(QtGui.QMainWindow):
         self.load_movies()
         self.show()
         self.signals()
-
+       
 
     def signals(self):
         self.ui.grilla.clicked.connect(self.show_poster) #table_movies es temporal
-        self.ui.btn_eliminar.clicked.connect(self.delete)            #btn_up es temporal
+        self.ui.btn_eliminar.clicked.connect(self.delete)
+        self.ui.btn_filtro.clicked.connect(self.load_filtered_movies)
+        self.ui.btn_crear.clicked.connect(self.prueba)
+    def prueba(self):
+        asd=self.ui.filtro_actor.text()
+        print(asd)
     def delete(self):
         index=self.ui.grilla.currentIndex()
         data = self.ui.grilla.model()
@@ -75,7 +80,29 @@ class Movies(QtGui.QMainWindow):
                 data.setData(index, field)
             # Parametros ocultos
             data.item(i).mov = mov
+    def load_filtered_movies(self):
+        movies = model.filter_movie()
+        
+        rows = len(movies)
+        data = QtGui.QStandardItemModel(
+            rows, len(self.table_columns))
+        self.ui.grilla.setModel(data)
+        self.ui.grilla.horizontalHeader().setResizeMode(
+            0, self.ui.grilla.horizontalHeader().Stretch)
 
+        for col, h in enumerate(self.table_columns):
+            data.setHeaderData(col, QtCore.Qt.Horizontal, h[0])
+            self.ui.grilla.setColumnWidth(col, h[1])
+
+        for i, mov in enumerate(movies):
+            row = [
+                mov["nombre"], mov["estreno"], mov["pais"],  # cambiar lo que esta dentro del parentesis dependiendo de la tabla
+                mov["descripcion"], mov["director_id"]]
+            for j, field in enumerate(row):
+                index = data.index(i, j, QtCore.QModelIndex())
+                data.setData(index, field)
+            # Parametros ocultos
+            data.item(i).mov = mov
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
