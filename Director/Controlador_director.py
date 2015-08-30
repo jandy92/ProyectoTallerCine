@@ -18,8 +18,10 @@ class Director(QtGui.QMainWindow):
         self.ui.setupUi(self)
         self.cargar_directores();
         self.show()
-       #self.signals()
-        
+        self.signals()
+    
+    def signals(self):
+        self.ui.grilla.clicked.connect(self.mostrar_imagen)
     def cargar_directores(self):
         directores=Modelo_director.obtener_directores()
         filas=len(directores)
@@ -40,6 +42,21 @@ class Director(QtGui.QMainWindow):
                 data.setData(index, field)
             # Parametros ocultos
             data.item(i).dire = dire
+
+    def mostrar_imagen(self, index):
+        index = index if index is not None\
+            else self.ui.grilla.currentIndex()
+        if index.row() == -1:
+            QtGui.QMessageBox.information(
+                None,
+                u"Información",
+                u"Por favor seleccione una orden de trabajo.")
+            return
+        data = self.ui.grilla.model()
+        dire = data.item(index.row(),0).dire
+        img = QtGui.QPixmap(str(dire['imagen'])[1:])
+        #print(str(dire['imagen'])[1:])
+        self.ui.imagen.setPixmap(img)
             
 
 

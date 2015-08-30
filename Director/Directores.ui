@@ -75,10 +75,29 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>30</y>
+     <y>190</y>
      <width>711</width>
-     <height>441</height>
+     <height>281</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="imagen">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>10</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
    </property>
   </widget>
   <zorder>grilla</zorder>
@@ -86,6 +105,7 @@
   <zorder>agregarDirector</zorder>
   <zorder>eliminarDirector</zorder>
   <zorder>silla_imagen</zorder>
+  <zorder>imagen</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Directores.ui'
 #
-# Created: Sat Aug 29 23:45:58 2015
+# Created: Sun Aug 30 01:19:53 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -29,14 +29,20 @@ class Ui_Form(object):
         self.silla_imagen.setScaledContents(True)
         self.silla_imagen.setObjectName("silla_imagen")
         self.grilla = QtGui.QTableView(Form)
-        self.grilla.setGeometry(QtCore.QRect(30, 30, 711, 441))
+        self.grilla.setGeometry(QtCore.QRect(30, 190, 711, 281))
         self.grilla.setObjectName("grilla")
+        self.imagen = QtGui.QLabel(Form)
+        self.imagen.setGeometry(QtCore.QRect(40, 10, 131, 171))
+        self.imagen.setStyleSheet("")
+        self.imagen.setText("")
+        self.imagen.setScaledContents(True)
+        self.imagen.setObjectName("imagen")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
-        Form.setWindowTitle(QtGui.QApplication.translate("Form", "Directores", None, QtGui.QApplication.UnicodeUTF8))
+        Form.setWindowTitle(QtGui.QApplication.translate("Form", "Form", None, QtGui.QApplication.UnicodeUTF8))
         self.editarDirector.setText(QtGui.QApplication.translate("Form", "Editar", None, QtGui.QApplication.UnicodeUTF8))
         self.agregarDirector.setText(QtGui.QApplication.translate("Form", "Agregar", None, QtGui.QApplication.UnicodeUTF8))
         self.eliminarDirector.setText(QtGui.QApplication.translate("Form", "Eliminar", None, QtGui.QApplication.UnicodeUTF8))
