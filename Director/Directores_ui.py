@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Directores.ui'
 #
-# Created: Sun Aug 30 01:19:53 2015
+# Created: Sun Aug 30 01:26:41 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -30,6 +30,7 @@ class Ui_Form(object):
         self.silla_imagen.setObjectName("silla_imagen")
         self.grilla = QtGui.QTableView(Form)
         self.grilla.setGeometry(QtCore.QRect(30, 190, 711, 281))
+        self.grilla.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
         self.grilla.setObjectName("grilla")
         self.imagen = QtGui.QLabel(Form)
         self.imagen.setGeometry(QtCore.QRect(40, 10, 131, 171))

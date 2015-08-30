@@ -80,6 +80,9 @@
      <height>281</height>
     </rect>
    </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
   </widget>
   <widget class="QLabel" name="imagen">
    <property name="geometry">
