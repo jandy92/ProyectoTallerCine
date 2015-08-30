@@ -4,11 +4,11 @@
 import sqlite3
 
 def conectar():
-    con = sqlite3.connect('ProyectoCine.db')
+    con = sqlite3.connect('../ProyectoCine.db')
     con.row_factory = sqlite3.Row
     return con
 
-def obtener_director():
+def obtener_directores():
     con = conectar()
     c = con.cursor()
     query = "SELECT * FROM director"
@@ -43,7 +43,7 @@ def crear_director(nombre, pais, fecha_nacimiento,fecha_defuncion):
 
 if __name__ == "__main__":
 
-    directores = obtener_director()
+    directores = obtener_directores()
     for director in directores:
         print director["nombre"]
 

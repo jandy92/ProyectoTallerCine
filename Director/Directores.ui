@@ -6,28 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>774</width>
     <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="gridLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>80</y>
-     <width>631</width>
-     <height>401</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="grillaDirectores">
-    <property name="leftMargin">
-     <number>0</number>
-    </property>
-   </layout>
-  </widget>
   <widget class="QPushButton" name="editarDirector">
    <property name="geometry">
     <rect>
@@ -70,8 +55,8 @@
   <widget class="QLabel" name="silla_imagen">
    <property name="geometry">
     <rect>
-     <x>670</x>
-     <y>450</y>
+     <x>660</x>
+     <y>470</y>
      <width>121</width>
      <height>141</height>
     </rect>
@@ -86,6 +71,21 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QTableView" name="grilla">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>30</y>
+     <width>711</width>
+     <height>441</height>
+    </rect>
+   </property>
+  </widget>
+  <zorder>grilla</zorder>
+  <zorder>editarDirector</zorder>
+  <zorder>agregarDirector</zorder>
+  <zorder>eliminarDirector</zorder>
+  <zorder>silla_imagen</zorder>
  </widget>
  <resources/>
  <connections/>
