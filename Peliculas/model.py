@@ -31,10 +31,7 @@ def delete_movie(nombre):
     con = connect()
     c = con.cursor()
     nombre="'"+nombre+"'"
-    nombre="WHERE nombre="+nombre
-    
-    print(nombre)
-    
+    nombre="WHERE nombre="+nombre   
     query = (
         "DELETE FROM pelicula "
         +nombre)
