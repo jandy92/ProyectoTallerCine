@@ -54,7 +54,7 @@ class Director(QtGui.QMainWindow):
             return
         data = self.ui.grilla.model()
         dire = data.item(index.row(),0).dire
-        img = QtGui.QPixmap(str(dire['imagen'])[1:])
+        img = QtGui.QPixmap(str(dire['imagen']))
         #print(str(dire['imagen'])[1:])
         self.ui.imagen.setPixmap(img)
             
