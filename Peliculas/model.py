@@ -8,11 +8,11 @@ def connect():
     con = sqlite3.connect('../ProyectoCine.db')
     con.row_factory = sqlite3.Row
     return con
-def filter_movie():
+def filter_movie(actor):
     
     con = connect()
     c = con.cursor()
-    actor="Danny Trejo"
+    
     actor="'"+actor+"'))"
   
     query = ("SELECT * FROM pelicula "

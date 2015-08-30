@@ -81,8 +81,8 @@ class Movies(QtGui.QMainWindow):
             # Parametros ocultos
             data.item(i).mov = mov
     def load_filtered_movies(self):
-        
-        movies = model.filter_movie()
+        actor=self.ui.filtro_actor.text()
+        movies = model.filter_movie(actor)
         
         rows = len(movies)
         if rows == 0:
