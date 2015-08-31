@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'crear_director_ui.ui'
 #
-# Created: Mon Aug 31 09:01:05 2015
+# Created: Mon Aug 31 10:51:57 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,6 +17,7 @@ class Ui_formulario_crear(object):
         self.centralwidget.setObjectName("centralwidget")
         self.nombre_in = QtGui.QLineEdit(self.centralwidget)
         self.nombre_in.setGeometry(QtCore.QRect(180, 40, 300, 25))
+        self.nombre_in.setPlaceholderText("")
         self.nombre_in.setObjectName("nombre_in")
         self.nacimiento_in = QtGui.QDateEdit(self.centralwidget)
         self.nacimiento_in.setGeometry(QtCore.QRect(360, 70, 120, 25))
@@ -77,12 +78,11 @@ class Ui_formulario_crear(object):
 
     def retranslateUi(self, formulario_crear):
         formulario_crear.setWindowTitle(QtGui.QApplication.translate("formulario_crear", "Crear Director", None, QtGui.QApplication.UnicodeUTF8))
-        self.nombre_in.setPlaceholderText(QtGui.QApplication.translate("formulario_crear", "Nombre del actor", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("formulario_crear", "Fecha de nacimiento", None, QtGui.QApplication.UnicodeUTF8))
         self.pais_label.setText(QtGui.QApplication.translate("formulario_crear", "País", None, QtGui.QApplication.UnicodeUTF8))
         self.boton_foto.setText(QtGui.QApplication.translate("formulario_crear", "Agregar fotografía...", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("formulario_crear", "Fecha de defunción", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_2.setText(QtGui.QApplication.translate("formulario_crear", "Nombre Actor", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("formulario_crear", "Nombre director", None, QtGui.QApplication.UnicodeUTF8))
         self.difunto_check.setText(QtGui.QApplication.translate("formulario_crear", "Difunto", None, QtGui.QApplication.UnicodeUTF8))
         self.crear_boton.setText(QtGui.QApplication.translate("formulario_crear", "Crear", None, QtGui.QApplication.UnicodeUTF8))
         self.limpiar_boton.setText(QtGui.QApplication.translate("formulario_crear", "Limpiar", None, QtGui.QApplication.UnicodeUTF8))

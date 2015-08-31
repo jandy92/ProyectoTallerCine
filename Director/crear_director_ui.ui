@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="placeholderText">
-     <string>Nombre del actor</string>
+     <string/>
     </property>
    </widget>
    <widget class="QDateEdit" name="nacimiento_in">
@@ -198,7 +198,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Nombre Actor</string>
+     <string>Nombre director</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="difunto_check">
