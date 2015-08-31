@@ -8,6 +8,18 @@ def conectar():
     con.row_factory = sqlite3.Row
     return con
 
+def buscar_id(num):
+	# recibe id y devuelve arreglo con todos los datos
+	con = conectar()
+	c = con.cursor()
+	querry = "SELECT * FROM director WHERE id = ?"
+	resultado = c.execute(querry,[num])
+	lista = resultado.fetchall()
+	con.close()
+	return lista
+
+
+
 def obtener_directores():
     con = conectar()
     c = con.cursor()
@@ -45,7 +57,7 @@ def checkea_director(nombre):#devuelve true si encuentra algun director del nomb
     existe=True
     con=conectar()
     c=con.cursor()
-    query="SELECT * FROM director WHERE nombre= ? COLLATE NOCASE" 
+    query="SELECT * FROM director WHERE nombre= ?"
     resultado=c.execute(query,[nombre])
     lista=resultado.fetchall()
     con.close()
@@ -54,8 +66,8 @@ def checkea_director(nombre):#devuelve true si encuentra algun director del nomb
     return existe
 
 if __name__ == "__main__":
-
-    directores = obtener_directores()
-    for director in directores:
-        print director["nombre"]
-
+	
+	lista = buscar_id(2)
+	for dato in lista:
+		print(str(dato))
+    
