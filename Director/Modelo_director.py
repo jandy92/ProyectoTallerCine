@@ -32,13 +32,13 @@ def borrar(id):
     con.close()
     return exito
 
-def crear_director(nombre, pais, fecha_nacimiento,fecha_defuncion):
+def crear_director(nombre, pais, fecha_nacimiento,fecha_defuncion,imagen):
     con = conectar()
     c = con.cursor()
     sql = (
-        "INSERT INTO director (nombre, pais, fecha_nacimiento,fecha_defuncion)"
-        "VALUES (?, ?, ?, ?)")
-    c.execute(sql, (nombre, pais, fecha_nacimiento,fecha_defuncion))
+        "INSERT INTO director (nombre, pais, fecha_nacimiento,fecha_defuncion,imagen)"
+        "VALUES (?, ?, ?, ?,?)")
+    c.execute(sql, (nombre, pais, fecha_nacimiento,fecha_defuncion,imagen))
     con.commit()
 
 if __name__ == "__main__":

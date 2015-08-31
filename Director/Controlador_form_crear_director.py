@@ -12,15 +12,16 @@ class Controlador_form_crear_director(QtGui.QMainWindow):
 		self.ui=Ui_formulario_crear()
 		self.ui.setupUi(self)
 		self.show()
-		self.signals()
 		self.listo=False;#True: los datos obligatorios existen, False:si no
 		self.nombre=""
 		self.imagen=""
 		self.nacimiento=""
 		self.defuncion=""
 		self.pais=""
+		self.signals()
 
     def signals(self):
+    	self.ui.boton_foto.clicked.connect(self.cargar_imagen)
     	self.ui.difunto_check.clicked.connect(self.difunto_check_clicked)
     	self.ui.crear_boton.clicked.connect(self.crear_director)
 
@@ -49,10 +50,19 @@ class Controlador_form_crear_director(QtGui.QMainWindow):
     	if(self.listo==True):#si los campos obligatorios tienen datos, se crea el director
     		print("Creando nuevo director ...")
     		               #crear_director(nombre, pais, fecha_nacimiento,fecha_defuncion):
-    		Modelo_director.crear_director(self.nombre,self.pais,self.nacimiento,self.defuncion)
+    		Modelo_director.crear_director(self.nombre,self.pais,self.nacimiento,self.defuncion,"img/"+self.nombre.replace(" ","_")+".jpg")
+    		self.ui.foto_label.pixmap().save("img/"+self.nombre.replace(" ","_")+".jpg","jpg")
     	else:#si falta algun campo obligatorio, no se creara el nuevo director
     		print("Faltan datos obligatorios, no se ha creado un nuevo director.")
-    	
+
+    def cargar_imagen(self):
+    	print("cargar imagen")
+    	fileName = QtGui.QFileDialog.getOpenFileName(self, 'Seleccione imagen de director',None,
+    	"Archivo de imagen (*.png *.jpg)")#se abre un dialogo con un "filtro" en que solo se muestran imagenes
+    	print (fileName[0])
+    	#img = QtGui.QPixmap(fileName)
+        self.ui.foto_label.setPixmap(QtGui.QPixmap(fileName[0]))
+
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
