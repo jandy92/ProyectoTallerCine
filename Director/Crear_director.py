@@ -1,0 +1,90 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'crear_director_ui.ui'
+#
+# Created: Mon Aug 31 09:01:05 2015
+#      by: pyside-uic 0.2.15 running on PySide 1.2.1
+#
+# WARNING! All changes made in this file will be lost!
+
+from PySide import QtCore, QtGui
+
+class Ui_formulario_crear(object):
+    def setupUi(self, formulario_crear):
+        formulario_crear.setObjectName("formulario_crear")
+        formulario_crear.resize(500, 260)
+        self.centralwidget = QtGui.QWidget(formulario_crear)
+        self.centralwidget.setObjectName("centralwidget")
+        self.nombre_in = QtGui.QLineEdit(self.centralwidget)
+        self.nombre_in.setGeometry(QtCore.QRect(180, 40, 300, 25))
+        self.nombre_in.setObjectName("nombre_in")
+        self.nacimiento_in = QtGui.QDateEdit(self.centralwidget)
+        self.nacimiento_in.setGeometry(QtCore.QRect(360, 70, 120, 25))
+        self.nacimiento_in.setDate(QtCore.QDate(2015, 8, 31))
+        self.nacimiento_in.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1752, 9, 14), QtCore.QTime(0, 0, 0)))
+        self.nacimiento_in.setMinimumDate(QtCore.QDate(1752, 9, 14))
+        self.nacimiento_in.setCalendarPopup(True)
+        self.nacimiento_in.setObjectName("nacimiento_in")
+        self.foto_label = QtGui.QLabel(self.centralwidget)
+        self.foto_label.setGeometry(QtCore.QRect(10, 20, 150, 200))
+        self.foto_label.setAutoFillBackground(True)
+        self.foto_label.setText("")
+        self.foto_label.setPixmap(QtGui.QPixmap("img/0.jpg"))
+        self.foto_label.setScaledContents(True)
+        self.foto_label.setObjectName("foto_label")
+        self.label = QtGui.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(180, 75, 141, 16))
+        self.label.setObjectName("label")
+        self.pais_in = QtGui.QLineEdit(self.centralwidget)
+        self.pais_in.setGeometry(QtCore.QRect(280, 160, 200, 25))
+        self.pais_in.setObjectName("pais_in")
+        self.pais_label = QtGui.QLabel(self.centralwidget)
+        self.pais_label.setGeometry(QtCore.QRect(180, 165, 141, 16))
+        self.pais_label.setObjectName("pais_label")
+        self.boton_foto = QtGui.QToolButton(self.centralwidget)
+        self.boton_foto.setGeometry(QtCore.QRect(10, 230, 150, 23))
+        self.boton_foto.setObjectName("boton_foto")
+        self.label_3 = QtGui.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(180, 125, 141, 16))
+        self.label_3.setObjectName("label_3")
+        self.defuncion_in = QtGui.QDateEdit(self.centralwidget)
+        self.defuncion_in.setEnabled(False)
+        self.defuncion_in.setGeometry(QtCore.QRect(360, 120, 120, 25))
+        self.defuncion_in.setDate(QtCore.QDate(2015, 8, 31))
+        self.defuncion_in.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1752, 9, 14), QtCore.QTime(0, 0, 0)))
+        self.defuncion_in.setMinimumDate(QtCore.QDate(1752, 9, 14))
+        self.defuncion_in.setCalendarPopup(True)
+        self.defuncion_in.setObjectName("defuncion_in")
+        self.label_2 = QtGui.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(180, 20, 141, 16))
+        self.label_2.setObjectName("label_2")
+        self.difunto_check = QtGui.QCheckBox(self.centralwidget)
+        self.difunto_check.setGeometry(QtCore.QRect(180, 100, 85, 21))
+        self.difunto_check.setObjectName("difunto_check")
+        self.crear_boton = QtGui.QPushButton(self.centralwidget)
+        self.crear_boton.setGeometry(QtCore.QRect(220, 220, 85, 27))
+        self.crear_boton.setObjectName("crear_boton")
+        self.limpiar_boton = QtGui.QPushButton(self.centralwidget)
+        self.limpiar_boton.setGeometry(QtCore.QRect(310, 220, 85, 27))
+        self.limpiar_boton.setObjectName("limpiar_boton")
+        self.cancelar_boton = QtGui.QPushButton(self.centralwidget)
+        self.cancelar_boton.setGeometry(QtCore.QRect(400, 220, 85, 27))
+        self.cancelar_boton.setObjectName("cancelar_boton")
+        formulario_crear.setCentralWidget(self.centralwidget)
+
+        self.retranslateUi(formulario_crear)
+        QtCore.QMetaObject.connectSlotsByName(formulario_crear)
+
+    def retranslateUi(self, formulario_crear):
+        formulario_crear.setWindowTitle(QtGui.QApplication.translate("formulario_crear", "Crear Director", None, QtGui.QApplication.UnicodeUTF8))
+        self.nombre_in.setPlaceholderText(QtGui.QApplication.translate("formulario_crear", "Nombre del actor", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("formulario_crear", "Fecha de nacimiento", None, QtGui.QApplication.UnicodeUTF8))
+        self.pais_label.setText(QtGui.QApplication.translate("formulario_crear", "País", None, QtGui.QApplication.UnicodeUTF8))
+        self.boton_foto.setText(QtGui.QApplication.translate("formulario_crear", "Agregar fotografía...", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_3.setText(QtGui.QApplication.translate("formulario_crear", "Fecha de defunción", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("formulario_crear", "Nombre Actor", None, QtGui.QApplication.UnicodeUTF8))
+        self.difunto_check.setText(QtGui.QApplication.translate("formulario_crear", "Difunto", None, QtGui.QApplication.UnicodeUTF8))
+        self.crear_boton.setText(QtGui.QApplication.translate("formulario_crear", "Crear", None, QtGui.QApplication.UnicodeUTF8))
+        self.limpiar_boton.setText(QtGui.QApplication.translate("formulario_crear", "Limpiar", None, QtGui.QApplication.UnicodeUTF8))
+        self.cancelar_boton.setText(QtGui.QApplication.translate("formulario_crear", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
+
