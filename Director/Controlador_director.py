@@ -99,7 +99,8 @@ class Controlador_form_crear_director(QtGui.QMainWindow):
         self.ui.boton_foto.clicked.connect(self.cargar_imagen)
         self.ui.difunto_check.clicked.connect(self.difunto_check_clicked)
         self.ui.crear_boton.clicked.connect(self.crear_director)
-        #self.ui.cancelar_boton.clicked.connect(self.lalala);
+        self.ui.cancelar_boton.clicked.connect(self.cancelar)
+        self.ui.limpiar_boton.clicked.connect(self.limpiar)
 
     def difunto_check_clicked(self):#si "difunto" esta chequeado activa el ingreso de fecha de defuncion, de lo contrario, la desactiva
         #print(self.ui.difunto_check.isChecked())
@@ -127,7 +128,9 @@ class Controlador_form_crear_director(QtGui.QMainWindow):
             print("Creando nuevo director ...")
                            #crear_director(nombre, pais, fecha_nacimiento,fecha_defuncion):
             Modelo_director.crear_director(self.nombre,self.pais,self.nacimiento,self.defuncion,"img/"+self.nombre.replace(" ","_")+".jpg")
-            self.ui.foto_label.pixmap().save("img/"+self.nombre.replace(" ","_")+".jpg","jpg")
+            self.ui.foto_label.pixmap().save("img/"+self.nombre.replace(" ","_")+".jpg","jpg")#guarda la imagen que se selecciono a la carpeta "img"
+            self.limpiar()
+            self.close()
         else:#si falta algun campo obligatorio, no se creara el nuevo director
             if(len(self.nombre)>0):
                 QtGui.QMessageBox.critical(self, "Director Existente","Error:\nEL director que intenta agregar ("+self.nombre+"), ya existe en la base de datos")
@@ -139,8 +142,18 @@ class Controlador_form_crear_director(QtGui.QMainWindow):
         fileName = QtGui.QFileDialog.getOpenFileName(self, 'Seleccione imagen de director',None,
         "Archivo de imagen (*.png *.jpg)")#se abre un dialogo con un "filtro" en que solo se muestran imagenes
         print (fileName[0])
-        #img = QtGui.QPixmap(fileName)
         self.ui.foto_label.setPixmap(QtGui.QPixmap(fileName[0]))
+
+    def cancelar(self):
+        self.close()
+        self.limpiar()
+
+    def limpiar(self):#"limpia" el formulario
+        self.ui.nombre_in.setText("")
+        self.ui.pais_in.setText("")
+        self.ui.difunto_check.setChecked(False)
+        self.ui.defuncion_in.setEnabled(False)
+        self.ui.foto_label.setPixmap(QtGui.QPixmap("img/0.jpg"))
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)

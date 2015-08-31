@@ -45,7 +45,7 @@ def checkea_director(nombre):#devuelve true si encuentra algun director del nomb
     existe=True
     con=conectar()
     c=con.cursor()
-    query="SELECT * FROM director WHERE nombre= ?"
+    query="SELECT * FROM director WHERE nombre= ? COLLATE NOCASE" 
     resultado=c.execute(query,[nombre])
     lista=resultado.fetchall()
     con.close()
