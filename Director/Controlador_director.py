@@ -19,6 +19,7 @@ class Director(QtGui.QMainWindow):
         self.ui.setupUi(self)
         self.cargar_directores();
         self.show()
+        self.dialogo=Controlador_form_crear_director()
         self.signals()
                
     
@@ -26,6 +27,7 @@ class Director(QtGui.QMainWindow):
         self.ui.grilla.clicked.connect(self.mostrar_imagen)
         self.ui.eliminarDirector.clicked.connect(self.elimina)
         self.ui.agregarDirector.clicked.connect(self.mostrar_ventana_agregar)
+        self.dialogo.ui.crear_boton.clicked.connect(self.cargar_directores)
 
     def cargar_directores(self):
         directores=Modelo_director.obtener_directores()
@@ -74,8 +76,7 @@ class Director(QtGui.QMainWindow):
         #self.ui.imagen.setPixmap(img)
 
     def mostrar_ventana_agregar(self):
-       self.dialogo=Controlador_form_crear_director()
-       #self.dialogo.show();
+       self.dialogo.show();
 
 
 
@@ -85,7 +86,7 @@ class Controlador_form_crear_director(QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self, parent)
         self.ui=Ui_formulario_crear()
         self.ui.setupUi(self)
-        self.show()
+        #self.show()
         self.listo=False;#True: los datos obligatorios existen, False:si no
         self.nombre=""
         self.imagen=""
@@ -128,7 +129,10 @@ class Controlador_form_crear_director(QtGui.QMainWindow):
             Modelo_director.crear_director(self.nombre,self.pais,self.nacimiento,self.defuncion,"img/"+self.nombre.replace(" ","_")+".jpg")
             self.ui.foto_label.pixmap().save("img/"+self.nombre.replace(" ","_")+".jpg","jpg")
         else:#si falta algun campo obligatorio, no se creara el nuevo director
-            QtGui.QMessageBox.critical(self, "Director Existente","Error:\nEL director que intenta agregar ("+self.nombre+"), ya existe en la base de datos")
+            if(len(self.nombre)>0):
+                QtGui.QMessageBox.critical(self, "Director Existente","Error:\nEL director que intenta agregar ("+self.nombre+"), ya existe en la base de datos")
+            else:
+                QtGui.QMessageBox.critical(self, 'Faltan campos obligatorios','Error:\nLos campos "nombre" y "fecha de nacimiento" son obligatorios')
 
     def cargar_imagen(self):
         print("cargar imagen")
