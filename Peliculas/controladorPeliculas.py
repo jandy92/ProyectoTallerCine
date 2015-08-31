@@ -27,10 +27,9 @@ class Movies(QtGui.QMainWindow):
         self.ui.label_desc.setText("")
         self.ui.label_4.setText("Cantidad de actores: ")
     def signals(self):
-        self.ui.grilla.clicked.connect(self.show_poster) #table_movies es temporal
+        self.ui.grilla.clicked.connect(self.show_poster)
         self.ui.btn_eliminar.clicked.connect(self.delete)
         self.ui.btn_filtro.clicked.connect(self.load_filtered_movies)
-       
 
     def delete(self):
         index=self.ui.grilla.currentIndex()
@@ -55,12 +54,10 @@ class Movies(QtGui.QMainWindow):
         actores=self.sum_actores(mov["id"])
         actores=str(actores)
         self.ui.label_reparto.setText(actores)
-        # Colocamos la información en los labels
-  #      self.ui.lbl_stars.setText(mov["stars"])
         self.ui.label_desc.setText(mov["descripcion"])  #recordar cambiar el label.setWordWrap True para reparto :D
         # Ahora la imagen
-  #      img = QtGui.QPixmap(str(mov['poster']))  #str[mov[poster]] da el nombre del archivo para luego usarlo como una imagen
-  #      self.ui.lbl_image.setPixmap(img)
+        img = QtGui.QPixmap(mov['imagen'])  #str[mov[poster]] da el nombre del archivo para luego usarlo como una imagen
+        self.ui.label_imagen.setPixmap(img)
     def sum_actores(self,id_p):  #recorre la query como diccionario para luego contar los actores
         contador_actores=0
         movies = model.actor_count(id_p) #cambiar el nombre del model dependiendo de lo que se necesite 

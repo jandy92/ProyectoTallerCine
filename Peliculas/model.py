@@ -63,7 +63,7 @@ def get_movies():
     query = (
         "SELECT id, nombre, estreno, pais,"
         " descripcion,"
-        " director_id FROM pelicula ORDER BY id ASC")
+        " director_id, imagen FROM pelicula ORDER BY id ASC")
     result = c.execute(query)
     movies = result.fetchall()
     return movies
