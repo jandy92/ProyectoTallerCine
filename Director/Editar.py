@@ -1,0 +1,92 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import sys
+from PySide import QtGui, QtCore
+from Editar_director import Ui_formulario_editar
+import Modelo_director
+
+class Editar(QtGui.QMainWindow):
+
+    def __init__(self, parent=None):
+        QtGui.QMainWindow.__init__(self, parent)
+        self.ui = Ui_formulario_editar()
+        self.ui.setupUi(self)
+        self.show()
+        self.signals()
+        self.nombre=""
+        self.imagen=""
+        self.nacimiento=""
+        self.defuncion=""
+        self.pais=""
+        self.id=0
+
+    def signals(self):
+        self.ui.boton_foto.clicked.connect(self.cargar_imagen)
+        self.ui.difunto_check.clicked.connect(self.difunto_check_clicked)
+        self.ui.guardar_boton.clicked.connect(self.guardar_director)
+        self.ui.cancelar_boton.clicked.connect(self.cancelar)
+        self.ui.limpiar_boton.clicked.connect(self.limpiar)
+
+    def mostrar_datos(self){
+        
+    }
+
+    def obtener_datos(self):
+        self.nombre=""
+        self.imagen=""
+        self.nacimiento=""
+        self.defuncion=""
+        self.pais=""
+        self.id=0
+        self.nombre=self.ui.nombre_in.text()#obligatorio
+        self.pais=self.ui.pais_in.text()#obligatorio
+        self.nacimiento=self.ui.nacimiento_in.date().toPython().strftime("%Y-%m-%d")#transformar de fecha en QT a fecha en python a string
+        if(self.ui.difunto_check.isChecked()):
+            self.defuncion=self.ui.defuncion_in.date().toPython().strftime("%Y-%m-%d")#transformar de fecha en QT a fecha en python a string
+        self.listo=False
+        #print(len(self.nacimiento))
+        if(len(self.nombre)!=0 and len(self.nacimiento)!=0):#True: si los campos obligatorios estan definidos, False: si no
+            self.listo=True
+
+    def guardar_director(self):
+        self.obtener_datos()
+        if(self.listo==True and Modelo_director.checkea_director(self.nombre)==False):#si los campos obligatorios tienen datos, se crea el director
+                           #crear_director(nombre, pais, fecha_nacimiento,fecha_defuncion):
+            #Modelo_director.guardar_director(self.nombre,self.pais,self.nacimiento,self.defuncion,"img/"+self.nombre.replace(" ","_")+".jpg")
+            print("Actualizando director...")
+            self.ui.foto_label.pixmap().save("img/"+self.nombre.replace(" ","_")+".jpg","jpg")#guarda la imagen que se selecciono a la carpeta "img"
+            self.limpiar()
+            self.close()
+        else:#si falta algun campo obligatorio, no se creara el nuevo director
+            if(len(self.nombre)>0):
+                QtGui.QMessageBox.critical(self, "Director Existente","Error:\nEL director que intenta agregar ("+self.nombre+"), ya existe en la base de datos")
+            else:
+                QtGui.QMessageBox.critical(self, 'Faltan campos obligatorios','Error:\nLos campos "nombre" y "fecha de nacimiento" son obligatorios')
+
+
+    def difunto_check_clicked(self):#si "difunto" esta chequeado activa el ingreso de fecha de defuncion, de lo contrario, la desactiva
+        #print(self.ui.difunto_check.isChecked())
+        self.ui.defuncion_in.setEnabled(self.ui.difunto_check.isChecked())
+
+    def cargar_imagen(self):
+        print("cargar imagen")
+        fileName = QtGui.QFileDialog.getOpenFileName(self, 'Seleccione imagen de director',None,
+        "Archivo de imagen (*.png *.jpg)")#se abre un dialogo con un "filtro" en que solo se muestran imagenes
+        print (fileName[0])
+        self.ui.foto_label.setPixmap(QtGui.QPixmap(fileName[0]))
+
+    def cancelar(self):
+        self.close()
+        self.limpiar()
+
+    def limpiar(self):#"limpia" el formulario
+        self.ui.nombre_in.setText("")
+        self.ui.pais_in.setText("")
+        self.ui.difunto_check.setChecked(False)
+        self.ui.defuncion_in.setEnabled(False)
+        self.ui.foto_label.setPixmap(QtGui.QPixmap("img/0.jpg"))
+
+if __name__ == '__main__':
+    app = QtGui.QApplication(sys.argv)
+    main = Editar()
+    sys.exit(app.exec_())
