@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Directores.ui'
 #
-# Created: Sun Aug 30 01:26:41 2015
+# Created: Mon Aug 31 11:24:03 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -30,6 +30,7 @@ class Ui_Form(object):
         self.silla_imagen.setObjectName("silla_imagen")
         self.grilla = QtGui.QTableView(Form)
         self.grilla.setGeometry(QtCore.QRect(30, 190, 711, 281))
+        self.grilla.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.grilla.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
         self.grilla.setObjectName("grilla")
         self.imagen = QtGui.QLabel(Form)
@@ -43,7 +44,7 @@ class Ui_Form(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
-        Form.setWindowTitle(QtGui.QApplication.translate("Form", "Form", None, QtGui.QApplication.UnicodeUTF8))
+        Form.setWindowTitle(QtGui.QApplication.translate("Form", "Directores", None, QtGui.QApplication.UnicodeUTF8))
         self.editarDirector.setText(QtGui.QApplication.translate("Form", "Editar", None, QtGui.QApplication.UnicodeUTF8))
         self.agregarDirector.setText(QtGui.QApplication.translate("Form", "Agregar", None, QtGui.QApplication.UnicodeUTF8))
         self.eliminarDirector.setText(QtGui.QApplication.translate("Form", "Eliminar", None, QtGui.QApplication.UnicodeUTF8))

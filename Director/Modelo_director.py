@@ -41,6 +41,18 @@ def crear_director(nombre, pais, fecha_nacimiento,fecha_defuncion,imagen):
     c.execute(sql, (nombre, pais, fecha_nacimiento,fecha_defuncion,imagen))
     con.commit()
 
+def checkea_director(nombre):#devuelve true si encuentra algun director del nombre recibido como parametro, false si no.
+    existe=True
+    con=conectar()
+    c=con.cursor()
+    query="SELECT * FROM director WHERE nombre= ?"
+    resultado=c.execute(query,[nombre])
+    lista=resultado.fetchall()
+    con.close()
+    if(len(lista)==0):
+        existe=False
+    return existe
+
 if __name__ == "__main__":
 
     directores = obtener_directores()
