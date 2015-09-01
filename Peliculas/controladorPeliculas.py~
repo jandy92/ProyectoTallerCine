@@ -20,7 +20,7 @@ class Movies(QtGui.QMainWindow):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.load_movies()
-        #self.show()
+        self.show()
         self.signals()
         self.ui.label_reparto.setText("")
         self.ui.label_imagen.setText("")

@@ -15,6 +15,8 @@ class cine(QtGui.QMainWindow):
 	self.ui = Ui_Form()
 	self.ui.setupUi(self)
 	self.d=Director()
+	self.a=Actores()
+	self.p=Movies()
 	self.show()
 	self.signals()
 
@@ -24,11 +26,11 @@ class cine(QtGui.QMainWindow):
 	self.ui.Peliculas.clicked.connect(self.trae_peliculas)
 
     def trae_actores(self):
-	self.dialogo_actor.show();
+	self.a.show();
     def trae_director(self):
 	self.d.show();
     def trae_peliculas(self):
-	self.dialogo_peli.show();	
+	self.p.show();	
 
 
 

@@ -153,7 +153,7 @@ class ctrl_form_actor(QtGui.QMainWindow):
     	
     def limpiar(self):#"limpia" el formulario
         self.ui.nombre_in.setText("")
-        self.ui.imagen_label.setPixmap(QtGui.QPixmap("Actores/img/0.jpg"))
+        self.ui.imagen_label.setPixmap(QtGui.QPixmap("Actor/img/0.jpg"))
 
 
 

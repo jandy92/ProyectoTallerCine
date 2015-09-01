@@ -5,7 +5,7 @@ import sqlite3
 
 
 def connect():
-    con = sqlite3.connect('../ProyectoCine.db')
+    con = sqlite3.connect('ProyectoCine.db')
     con.row_factory = sqlite3.Row
     return con
 def filter_movie(actor):

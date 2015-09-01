@@ -4,7 +4,7 @@
 import sqlite3
 
 def conectar():
-    con = sqlite3.connect('../ProyectoCine.db')
+    con = sqlite3.connect('ProyectoCine.db')
     con.row_factory = sqlite3.Row
     return con
 

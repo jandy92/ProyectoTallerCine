@@ -21,7 +21,7 @@ class Director(QtGui.QMainWindow):
 	self.ui = Ui_Form()
 	self.ui.setupUi(self)
 	self.cargar_directores();
-	self.show()
+	#self.show()
 	self.dialogo=Controlador_form_crear_director()
 	self.editar=Editar.Editar()
 	self.signals()
