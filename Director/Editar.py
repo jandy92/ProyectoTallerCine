@@ -29,9 +29,9 @@ class Editar(QtGui.QMainWindow):
     
     def setID(self,id):
       self.id=id
-      self.obtener_datos(self.id);
+      self.obtener_datos();
 
-    def obtener_datos(self,id):
+    def obtener_datos(self):
         self.nombre=""
         self.imagen=""
         self.nacimiento=""
@@ -39,10 +39,10 @@ class Editar(QtGui.QMainWindow):
         self.pais=""
         self.ui.id_label.setText("ID:xXxX")
         #self.datos
-        if(id>=1):
-	  self.datos=Modelo_director.buscar_id(id)
+        if(self.id>=1):
+	  self.datos=Modelo_director.buscar_id(self.id)
 	  #print(self.datos)
-	  self.ui.id_label.setText("ID:"+str(id))
+	  self.ui.id_label.setText("ID:"+str(self.id))
 	  self.ui.nombre_in.setText(self.datos[0])
 	  self.ui.pais_in.setText(self.datos[1])
 	  if(self.datos[0]!=""):
@@ -57,30 +57,22 @@ class Editar(QtGui.QMainWindow):
 	  m=int(self.datos[2][5:7])
 	  d=int(self.datos[2][8:10])
 	  self.ui.nacimiento_in.setDate(QtCore.QDate(y,m,d))#Y,M,D
+	  self.ui.foto_label.setPixmap(QtGui.QPixmap(self.datos[4]))
 	  self.listo=True
-	#self.id=0
-        
-        """
-        self.nombre=self.ui.nombre_in.text()#obligatorio
-        self.pais=self.ui.pais_in.text()#obligatorio
-        self.nacimiento=self.ui.nacimiento_in.date().toPython().strftime("%Y-%m-%d")#transformar de fecha en QT a fecha en python a string
-        if(self.ui.difunto_check.isChecked()):
-            self.defuncion=self.ui.defuncion_in.date().toPython().strftime("%Y-%m-%d")#transformar de fecha en QT a fecha en python a string
-        
-        #print(len(self.nacimiento))
-        if(len(self.nombre)!=0 and len(self.nacimiento)!=0):#True: si los campos obligatorios estan definidos, False: si no
-            self.listo=True
-        """
+	  
+
 
     def guardar_director(self):
+	print("Guardando director modificado...")
         #self.obtener_datos()
-        if(self.listo==True and Modelo_director.checkea_director(self.nombre)==False):#si los campos obligatorios tienen datos, se crea el director
-                           #crear_director(nombre, pais, fecha_nacimiento,fecha_defuncion):
-            #Modelo_director.guardar_director(self.nombre,self.pais,self.nacimiento,self.defuncion,"img/"+self.nombre.replace(" ","_")+".jpg")
-            #print("Actualizando director...")
-            #(5,"ale", "chile", "1992-11-26","","")
-            Modelo_director.actualiza(self.id,self.ui.nombre_in.text(),self.ui.pais_in.text(),self.ui.nacimiento_in.date().toPython().strftime("%Y-%m-%d"),self.ui.defuncion_in.date().toPython().strftime("%Y-%m-%d"),"")
-            self.ui.foto_label.pixmap().save("img/"+self.nombre.replace(" ","_")+".jpg","jpg")#guarda la imagen que se selecciono a la carpeta "img"
+        if(len(self.ui.nombre_in.text())>0 and Modelo_director.checkea_director(self.nombre)==False):#si los campos obligatorios tienen datos, se crea el director
+	    defuncion=""
+	    if(self.ui.difunto_check.isChecked()):#si el director esta muerto, se guardará la fecha de defuncion
+	      defuncion=self.ui.defuncion_in.date().toPython().strftime("%Y-%m-%d")
+	      
+	    self.ui.foto_label.pixmap().save("img/"+self.nombre.replace(" ","_")+".jpg","jpg")#guarda la imagen que se selecciono a la carpeta "img"
+            Modelo_director.actualiza(self.id,self.ui.nombre_in.text(),self.ui.pais_in.text(),self.ui.nacimiento_in.date().toPython().strftime("%Y-%m-%d"),defuncion,"img/"+self.nombre.replace(" ","_")+".jpg")
+	    
             self.limpiar()
             self.close()
         else:#si falta algun campo obligatorio, no se creara el nuevo director
