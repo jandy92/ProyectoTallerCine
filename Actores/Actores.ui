@@ -62,7 +62,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>img_actor</string>
+    <string/>
    </property>
    <property name="scaledContents">
     <bool>true</bool>

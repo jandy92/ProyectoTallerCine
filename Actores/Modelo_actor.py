@@ -32,14 +32,26 @@ def borrar(id):
     con.close()
     return exito
 
-def crear_actor(nombres, birthday, genero,imagen):
+def crear_actor(nombre, birthday, genero,imagen):
     con = conectar()
     c = con.cursor()
     sql = (
-        "INSERT INTO actor (nombres, birthday, genero,imagen)"
+        "INSERT INTO actor (nombre, birthday, genero,imagen)"
         "VALUES (?, ?, ?, ?)")
-    c.execute(sql, (nombres, birthday, genero,imagen))
+    c.execute(sql, (nombre, birthday, genero,imagen))
     con.commit()
+
+def checkea_actor(nombre):#devuelve true si encuentra algun actor con el nombre recibido como parametro, false si no.
+    existe=True
+    con=conectar()
+    c=con.cursor()
+    query="SELECT * FROM actor WHERE nombre= ?"
+    resultado=c.execute(query,[nombre])
+    lista=resultado.fetchall()
+    con.close()
+    if(len(lista)==0):
+        existe=False
+    return existe
 
 
 
