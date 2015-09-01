@@ -69,5 +69,5 @@ def checkea_director(nombre):#devuelve true si encuentra algun director del nomb
 if __name__ == "__main__":
 	lista = buscar_id(2)
 	for dato in lista:
-		print(str(dato))
+	print(str(dato))
 

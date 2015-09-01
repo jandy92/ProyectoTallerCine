@@ -27,9 +27,10 @@ class Editar(QtGui.QMainWindow):
         self.ui.cancelar_boton.clicked.connect(self.cancelar)
         self.ui.limpiar_boton.clicked.connect(self.limpiar)
 
-    def mostrar_datos(self){
-        
-    }
+    def mostrar_datos(self):#muestra los datos del director de una ID especifica en el formulario
+        iD=""
+        pass
+    
 
     def obtener_datos(self):
         self.nombre=""
