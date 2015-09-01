@@ -27,6 +27,9 @@ class Editar(QtGui.QMainWindow):
         self.ui.cancelar_boton.clicked.connect(self.cancelar)
         self.ui.limpiar_boton.clicked.connect(self.limpiar)
     
+    def setID(self,id):
+      self.id=id
+      self.obtener_datos(self.id);
 
     def obtener_datos(self,id):
         self.nombre=""
@@ -54,27 +57,29 @@ class Editar(QtGui.QMainWindow):
 	  m=int(self.datos[2][5:7])
 	  d=int(self.datos[2][8:10])
 	  self.ui.nacimiento_in.setDate(QtCore.QDate(y,m,d))#Y,M,D
-	else:
-	  pass
-        self.id=0
+	  self.listo=True
+	#self.id=0
+        
         """
         self.nombre=self.ui.nombre_in.text()#obligatorio
         self.pais=self.ui.pais_in.text()#obligatorio
         self.nacimiento=self.ui.nacimiento_in.date().toPython().strftime("%Y-%m-%d")#transformar de fecha en QT a fecha en python a string
         if(self.ui.difunto_check.isChecked()):
             self.defuncion=self.ui.defuncion_in.date().toPython().strftime("%Y-%m-%d")#transformar de fecha en QT a fecha en python a string
-        self.listo=False
+        
         #print(len(self.nacimiento))
         if(len(self.nombre)!=0 and len(self.nacimiento)!=0):#True: si los campos obligatorios estan definidos, False: si no
             self.listo=True
         """
 
     def guardar_director(self):
-        self.obtener_datos()
+        #self.obtener_datos()
         if(self.listo==True and Modelo_director.checkea_director(self.nombre)==False):#si los campos obligatorios tienen datos, se crea el director
                            #crear_director(nombre, pais, fecha_nacimiento,fecha_defuncion):
             #Modelo_director.guardar_director(self.nombre,self.pais,self.nacimiento,self.defuncion,"img/"+self.nombre.replace(" ","_")+".jpg")
-            print("Actualizando director...")
+            #print("Actualizando director...")
+            #(5,"ale", "chile", "1992-11-26","","")
+            Modelo_director.actualiza(self.id,self.ui.nombre_in.text(),self.ui.pais_in.text(),self.ui.nacimiento_in.date().toPython().strftime("%Y-%m-%d"),self.ui.defuncion_in.date().toPython().strftime("%Y-%m-%d"),"")
             self.ui.foto_label.pixmap().save("img/"+self.nombre.replace(" ","_")+".jpg","jpg")#guarda la imagen que se selecciono a la carpeta "img"
             self.limpiar()
             self.close()
@@ -107,11 +112,6 @@ class Editar(QtGui.QMainWindow):
         self.ui.defuncion_in.setEnabled(False)
         self.ui.foto_label.setPixmap(QtGui.QPixmap("img/0.jpg"))
        
-
-    def mostrar_datos(self):#muestra los datos del director de una ID especifica en el formulario
-        iD=""
-        
-        pass
 
 if __name__ == '__main__':
 	app = QtGui.QApplication(sys.argv)

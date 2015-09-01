@@ -82,6 +82,6 @@ def actualiza(id,nombre, pais, fecha_nacimiento,fecha_defuncion,imagen):
    con.commit()
    
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
     #print("Recibe dato")
    # recibe_dato(5,"ale", "chile", "1992-11-26","","")

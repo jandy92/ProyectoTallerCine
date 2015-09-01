@@ -10,7 +10,8 @@ import Editar
 
 class Director(QtGui.QMainWindow):
     table_columns = (
-	(u"Nombre", 0),
+	(u"ID",0),
+	(u"Nombre", 150),
 	(u"Pais", 150),
 	(u"Fecha nacimiento", 150),
 	(u"Fecha defunción", 150))
@@ -31,6 +32,7 @@ class Director(QtGui.QMainWindow):
 	self.ui.eliminarDirector.clicked.connect(self.elimina)
 	self.ui.agregarDirector.clicked.connect(self.mostrar_ventana_agregar)
 	self.dialogo.ui.crear_boton.clicked.connect(self.cargar_directores)
+	self.editar.ui.guardar_boton.clicked.connect(self.cargar_directores)
 	self.ui.editarDirector.clicked.connect(self.editar_director)
 
     def cargar_directores(self):
@@ -45,7 +47,7 @@ class Director(QtGui.QMainWindow):
 	    self.ui.grilla.setColumnWidth(col, h[1])
 	    
 	for i, dire in enumerate(directores):
-	    filas = [
+	    filas = [dire["id"],
 	        dire["nombre"], dire["pais"],
 	        dire["fecha_nacimiento"],dire["fecha_defuncion"]]
 	    for j, field in enumerate(filas):
@@ -85,6 +87,12 @@ class Director(QtGui.QMainWindow):
        self.dialogo.show()
     
     def editar_director(self):
+      	index = self.ui.grilla.currentIndex()
+	data = self.ui.grilla.model()
+	dire = data.item(index.row(),0).dire
+	id=dire['id']
+	print(id)
+	self.editar.setID(id)
 	self.editar.show()
 	pass
 
