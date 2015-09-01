@@ -45,6 +45,7 @@ class Ui_Form(object):
         self.label_imagen = QtGui.QLabel(Form)
         self.label_imagen.setGeometry(QtCore.QRect(380, 30, 141, 121))
         self.label_imagen.setObjectName("label_imagen")
+        self.label_imagen.setScaledContents(True)
         self.grilla = QtGui.QTableView(Form)
         self.grilla.setGeometry(QtCore.QRect(10, 150, 341, 281))
         self.grilla.setObjectName("grilla")
