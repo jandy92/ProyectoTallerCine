@@ -2,7 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import sqlite3
-
+"""
+El formulario, dado una ID, se autocompleta con los datos correspondiente al director de dicha ID
+dando la posibilidad de modificar estos datos y los reemplaza en la base de datos
+"""
 def conectar():
     con = sqlite3.connect('../ProyectoCine.db')
     con.row_factory = sqlite3.Row
@@ -17,11 +20,10 @@ def buscar_id(num):#retorna una lista con todos los valores de la fila buscada (
 	resultado = c.execute(querry,[num])
 	lista = resultado.fetchall()
 	con.close();
-    	l=["","","","",""]
+    	l=[None,None,None,None,None]
 	#print(len(l))
-    	for i in range (0,5):
+    	for i in range (0,5):#se rellena el arreglo vacío
         	l[i]=lista[0][i+1]
-	
 	return l
 
 
@@ -70,6 +72,18 @@ def checkea_director(nombre):#devuelve true si encuentra algun director del nomb
     if(len(lista)==0):
         existe=False
     return existe
+  
+def recibe_dato(id,nombre, pais, fecha_nacimiento,fecha_defuncion,imagen):
+  pass
+  """
+   con=conectar()
+   c=con.cursor()
+   sql=("UPDATE director SET nombre=?, pais=?, fecha_nacimiento=?,fecha_defuncion=?,imagen=?
+     WHERE id =?")
+   c.execute(sql,(nombre, pais, fecha_nacimiento,fecha_defuncion,imagen, id))
+   """
+   
 
 if __name__ == "__main__":
-	print(buscar_id(2))
+    #print(buscar_id(2))
+    recibe_dato(5,"ale", "chile", "1992-11-26","","")

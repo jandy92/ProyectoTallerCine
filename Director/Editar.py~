@@ -11,7 +11,7 @@ class Editar(QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self, parent)
         self.ui = Ui_formulario_editar()
         self.ui.setupUi(self)
-        self.show()
+        #self.show()
         self.signals()
         self.nombre=""
         self.imagen=""
@@ -26,11 +26,6 @@ class Editar(QtGui.QMainWindow):
         self.ui.guardar_boton.clicked.connect(self.guardar_director)
         self.ui.cancelar_boton.clicked.connect(self.cancelar)
         self.ui.limpiar_boton.clicked.connect(self.limpiar)
-
-    def mostrar_datos(self):#muestra los datos del director de una ID especifica en el formulario
-        iD=""
-        
-        pass
     
 
     def obtener_datos(self):
@@ -39,7 +34,12 @@ class Editar(QtGui.QMainWindow):
         self.nacimiento=""
         self.defuncion=""
         self.pais=""
+        if(id!=0){
+        
+        
+        }
         self.id=0
+        """
         self.nombre=self.ui.nombre_in.text()#obligatorio
         self.pais=self.ui.pais_in.text()#obligatorio
         self.nacimiento=self.ui.nacimiento_in.date().toPython().strftime("%Y-%m-%d")#transformar de fecha en QT a fecha en python a string
@@ -49,6 +49,7 @@ class Editar(QtGui.QMainWindow):
         #print(len(self.nacimiento))
         if(len(self.nombre)!=0 and len(self.nacimiento)!=0):#True: si los campos obligatorios estan definidos, False: si no
             self.listo=True
+        """
 
     def guardar_director(self):
         self.obtener_datos()
@@ -87,8 +88,16 @@ class Editar(QtGui.QMainWindow):
         self.ui.difunto_check.setChecked(False)
         self.ui.defuncion_in.setEnabled(False)
         self.ui.foto_label.setPixmap(QtGui.QPixmap("img/0.jpg"))
+       
+
+    def mostrar_datos(self):#muestra los datos del director de una ID especifica en el formulario
+        iD=""
+        
+        pass
 
 if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)
-    main = Editar()
-    sys.exit(app.exec_())
+	app = QtGui.QApplication(sys.argv)
+	main = Editar()
+	main.show()
+	sys.exit(app.exec_())
+

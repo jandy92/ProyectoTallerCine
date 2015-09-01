@@ -72,4 +72,4 @@ def checkea_director(nombre):#devuelve true si encuentra algun director del nomb
     return existe
 
 if __name__ == "__main__":
-	#print(buscar_id(2))
+	print(buscar_id(2))

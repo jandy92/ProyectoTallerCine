@@ -11,7 +11,7 @@ class Editar(QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self, parent)
         self.ui = Ui_formulario_editar()
         self.ui.setupUi(self)
-        self.show()
+        #self.show()
         self.signals()
         self.nombre=""
         self.imagen=""
@@ -26,20 +26,38 @@ class Editar(QtGui.QMainWindow):
         self.ui.guardar_boton.clicked.connect(self.guardar_director)
         self.ui.cancelar_boton.clicked.connect(self.cancelar)
         self.ui.limpiar_boton.clicked.connect(self.limpiar)
-
-    def mostrar_datos(self):#muestra los datos del director de una ID especifica en el formulario
-        iD=""
-        
-        pass
     
 
-    def obtener_datos(self):
+    def obtener_datos(self,id):
         self.nombre=""
         self.imagen=""
         self.nacimiento=""
         self.defuncion=""
         self.pais=""
+        self.ui.id_label.setText("ID:xXxX")
+        #self.datos
+        if(id>=1):
+	  self.datos=Modelo_director.buscar_id(id)
+	  #print(self.datos)
+	  self.ui.id_label.setText("ID:"+str(id))
+	  self.ui.nombre_in.setText(self.datos[0])
+	  self.ui.pais_in.setText(self.datos[1])
+	  if(self.datos[0]!=""):
+	    self.ui.difunto_check.setChecked(False)
+	  else:
+	    self.ui.difunto_check.setChecked(True)
+	    y=int(self.datos[3][0:4])
+	    m=int(self.datos[3][5:7])
+	    d=int(self.datos[3][8:10])
+	    self.ui.defuncion_in.setDate(QtCore.QDate(y,m,d))#Y,M,D
+	  y=int(self.datos[2][0:4])
+	  m=int(self.datos[2][5:7])
+	  d=int(self.datos[2][8:10])
+	  self.ui.nacimiento_in.setDate(QtCore.QDate(y,m,d))#Y,M,D
+	else:
+	  pass
         self.id=0
+        """
         self.nombre=self.ui.nombre_in.text()#obligatorio
         self.pais=self.ui.pais_in.text()#obligatorio
         self.nacimiento=self.ui.nacimiento_in.date().toPython().strftime("%Y-%m-%d")#transformar de fecha en QT a fecha en python a string
@@ -49,6 +67,7 @@ class Editar(QtGui.QMainWindow):
         #print(len(self.nacimiento))
         if(len(self.nombre)!=0 and len(self.nacimiento)!=0):#True: si los campos obligatorios estan definidos, False: si no
             self.listo=True
+        """
 
     def guardar_director(self):
         self.obtener_datos()
@@ -87,8 +106,17 @@ class Editar(QtGui.QMainWindow):
         self.ui.difunto_check.setChecked(False)
         self.ui.defuncion_in.setEnabled(False)
         self.ui.foto_label.setPixmap(QtGui.QPixmap("img/0.jpg"))
+       
+
+    def mostrar_datos(self):#muestra los datos del director de una ID especifica en el formulario
+        iD=""
+        
+        pass
 
 if __name__ == '__main__':
 	app = QtGui.QApplication(sys.argv)
 	main = Editar()
+	main.show()
+	main.obtener_datos(1)
 	sys.exit(app.exec_())
+
