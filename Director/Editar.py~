@@ -27,6 +27,9 @@ class Editar(QtGui.QMainWindow):
         self.ui.cancelar_boton.clicked.connect(self.cancelar)
         self.ui.limpiar_boton.clicked.connect(self.limpiar)
     
+    def setID(self,id):
+      self.id=id
+      self.obtener_datos();
 
     def obtener_datos(self):
         self.nombre=""
@@ -34,30 +37,42 @@ class Editar(QtGui.QMainWindow):
         self.nacimiento=""
         self.defuncion=""
         self.pais=""
-        if(id!=0){
-        
-        
-        }
-        self.id=0
-        """
-        self.nombre=self.ui.nombre_in.text()#obligatorio
-        self.pais=self.ui.pais_in.text()#obligatorio
-        self.nacimiento=self.ui.nacimiento_in.date().toPython().strftime("%Y-%m-%d")#transformar de fecha en QT a fecha en python a string
-        if(self.ui.difunto_check.isChecked()):
-            self.defuncion=self.ui.defuncion_in.date().toPython().strftime("%Y-%m-%d")#transformar de fecha en QT a fecha en python a string
-        self.listo=False
-        #print(len(self.nacimiento))
-        if(len(self.nombre)!=0 and len(self.nacimiento)!=0):#True: si los campos obligatorios estan definidos, False: si no
-            self.listo=True
-        """
+        self.ui.id_label.setText("ID:xXxX")
+        #self.datos
+        if(self.id>=1):
+	  self.datos=Modelo_director.buscar_id(self.id)
+	  #print(self.datos)
+	  self.ui.id_label.setText("ID:"+str(self.id))
+	  self.ui.nombre_in.setText(self.datos[0])
+	  self.ui.pais_in.setText(self.datos[1])
+	  if(self.datos[0]!=""):
+	    self.ui.difunto_check.setChecked(False)
+	  else:
+	    self.ui.difunto_check.setChecked(True)
+	    y=int(self.datos[3][0:4])
+	    m=int(self.datos[3][5:7])
+	    d=int(self.datos[3][8:10])
+	    self.ui.defuncion_in.setDate(QtCore.QDate(y,m,d))#Y,M,D
+	  y=int(self.datos[2][0:4])
+	  m=int(self.datos[2][5:7])
+	  d=int(self.datos[2][8:10])
+	  self.ui.nacimiento_in.setDate(QtCore.QDate(y,m,d))#Y,M,D
+	  self.ui.foto_label.setPixmap(QtGui.QPixmap(self.datos[4]))
+	  self.listo=True
+	  
+
 
     def guardar_director(self):
-        self.obtener_datos()
-        if(self.listo==True and Modelo_director.checkea_director(self.nombre)==False):#si los campos obligatorios tienen datos, se crea el director
-                           #crear_director(nombre, pais, fecha_nacimiento,fecha_defuncion):
-            #Modelo_director.guardar_director(self.nombre,self.pais,self.nacimiento,self.defuncion,"img/"+self.nombre.replace(" ","_")+".jpg")
-            print("Actualizando director...")
-            self.ui.foto_label.pixmap().save("img/"+self.nombre.replace(" ","_")+".jpg","jpg")#guarda la imagen que se selecciono a la carpeta "img"
+	print("Guardando director modificado...")
+        #self.obtener_datos()
+        if(len(self.ui.nombre_in.text())>0 and Modelo_director.checkea_director(self.nombre)==False):#si los campos obligatorios tienen datos, se crea el director
+	    defuncion=""
+	    if(self.ui.difunto_check.isChecked()):#si el director esta muerto, se guardará la fecha de defuncion
+	      defuncion=self.ui.defuncion_in.date().toPython().strftime("%Y-%m-%d")
+	      
+	    self.ui.foto_label.pixmap().save("Director/img/"+self.nombre.replace(" ","_")+".jpg","jpg")#guarda la imagen que se selecciono a la carpeta "img"
+            Modelo_director.actualiza(self.id,self.ui.nombre_in.text(),self.ui.pais_in.text(),self.ui.nacimiento_in.date().toPython().strftime("%Y-%m-%d"),defuncion,"Director/img/"+self.nombre.replace(" ","_")+".jpg")
+	    
             self.limpiar()
             self.close()
         else:#si falta algun campo obligatorio, no se creara el nuevo director
@@ -87,17 +102,13 @@ class Editar(QtGui.QMainWindow):
         self.ui.pais_in.setText("")
         self.ui.difunto_check.setChecked(False)
         self.ui.defuncion_in.setEnabled(False)
-        self.ui.foto_label.setPixmap(QtGui.QPixmap("img/0.jpg"))
+        self.ui.foto_label.setPixmap(QtGui.QPixmap("Director/img/0.jpg"))
        
-
-    def mostrar_datos(self):#muestra los datos del director de una ID especifica en el formulario
-        iD=""
-        
-        pass
 
 if __name__ == '__main__':
 	app = QtGui.QApplication(sys.argv)
 	main = Editar()
 	main.show()
+	main.obtener_datos(1)
 	sys.exit(app.exec_())
 

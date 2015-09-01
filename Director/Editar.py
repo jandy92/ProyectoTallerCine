@@ -70,8 +70,8 @@ class Editar(QtGui.QMainWindow):
 	    if(self.ui.difunto_check.isChecked()):#si el director esta muerto, se guardará la fecha de defuncion
 	      defuncion=self.ui.defuncion_in.date().toPython().strftime("%Y-%m-%d")
 	      
-	    self.ui.foto_label.pixmap().save("img/"+self.nombre.replace(" ","_")+".jpg","jpg")#guarda la imagen que se selecciono a la carpeta "img"
-            Modelo_director.actualiza(self.id,self.ui.nombre_in.text(),self.ui.pais_in.text(),self.ui.nacimiento_in.date().toPython().strftime("%Y-%m-%d"),defuncion,"img/"+self.nombre.replace(" ","_")+".jpg")
+	    self.ui.foto_label.pixmap().save("Director/img/"+self.nombre.replace(" ","_")+".jpg","jpg")#guarda la imagen que se selecciono a la carpeta "img"
+            Modelo_director.actualiza(self.id,self.ui.nombre_in.text(),self.ui.pais_in.text(),self.ui.nacimiento_in.date().toPython().strftime("%Y-%m-%d"),defuncion,"Director/img/"+self.nombre.replace(" ","_")+".jpg")
 	    
             self.limpiar()
             self.close()
@@ -102,7 +102,7 @@ class Editar(QtGui.QMainWindow):
         self.ui.pais_in.setText("")
         self.ui.difunto_check.setChecked(False)
         self.ui.defuncion_in.setEnabled(False)
-        self.ui.foto_label.setPixmap(QtGui.QPixmap("img/0.jpg"))
+        self.ui.foto_label.setPixmap(QtGui.QPixmap("Director/img/0.jpg"))
        
 
 if __name__ == '__main__':

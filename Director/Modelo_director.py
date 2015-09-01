@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 
 import sqlite3
+import os.path
 """
 El formulario, dado una ID, se autocompleta con los datos correspondiente al director de dicha ID
 dando la posibilidad de modificar estos datos y los reemplaza en la base de datos
 """
 def conectar():
-    con = sqlite3.connect('../ProyectoCine.db')
+    print(os.path.dirname(__file__))
+    con = sqlite3.connect('ProyectoCine.db')
     con.row_factory = sqlite3.Row
     return con
 
@@ -82,6 +84,6 @@ def actualiza(id,nombre, pais, fecha_nacimiento,fecha_defuncion,imagen):
    con.commit()
    
 
-#if __name__ == "__main__":
-    #print("Recibe dato")
-   # recibe_dato(5,"ale", "chile", "1992-11-26","","")
+if __name__ == "__main__":
+	print("Recibe dato")
+	recibe_dato(5,"ale", "chile", "1992-11-26","","")

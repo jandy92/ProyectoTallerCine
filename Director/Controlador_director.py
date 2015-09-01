@@ -144,8 +144,8 @@ class Controlador_form_crear_director(QtGui.QMainWindow):
         if(self.listo==True and Modelo_director.checkea_director(self.nombre)==False):#si los campos obligatorios tienen datos, se crea el director
             print("Creando nuevo director ...")
                            #crear_director(nombre, pais, fecha_nacimiento,fecha_defuncion):
-            Modelo_director.crear_director(self.nombre,self.pais,self.nacimiento,self.defuncion,"img/"+self.nombre.replace(" ","_")+".jpg")
-            self.ui.foto_label.pixmap().save("img/"+self.nombre.replace(" ","_")+".jpg","jpg")#guarda la imagen que se selecciono a la carpeta "img"
+            Modelo_director.crear_director(self.nombre,self.pais,self.nacimiento,self.defuncion,"Director/img/"+self.nombre.replace(" ","_")+".jpg")
+            self.ui.foto_label.pixmap().save("Director/img/"+self.nombre.replace(" ","_")+".jpg","jpg")#guarda la imagen que se selecciono a la carpeta "img"
             self.limpiar()
             self.close()
         else:#si falta algun campo obligatorio, no se creara el nuevo director
@@ -170,7 +170,7 @@ class Controlador_form_crear_director(QtGui.QMainWindow):
         self.ui.pais_in.setText("")
         self.ui.difunto_check.setChecked(False)
         self.ui.defuncion_in.setEnabled(False)
-        self.ui.foto_label.setPixmap(QtGui.QPixmap("img/0.jpg"))
+        self.ui.foto_label.setPixmap(QtGui.QPixmap("Director/img/0.jpg"))
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)

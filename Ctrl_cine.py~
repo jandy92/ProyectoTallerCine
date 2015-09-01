@@ -14,7 +14,7 @@ class cine(QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self, parent)
 	self.ui = Ui_Form()
 	self.ui.setupUi(self)
-	self.d=Director()
+	#self.d=Director()
 	self.show()
 	self.signals()
 
@@ -26,7 +26,8 @@ class cine(QtGui.QMainWindow):
     def trae_actores(self):
 	self.dialogo_actor.show();
     def trae_director(self):
-	self.d.show();
+	#self.d.show();
+	subprocess.call("./Director/Controlador_director.py", shell=True)
     def trae_peliculas(self):
 	self.dialogo_peli.show();	
 
