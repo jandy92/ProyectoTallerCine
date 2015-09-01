@@ -11,13 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Menú Principal</string>
   </property>
   <widget class="QPushButton" name="Director">
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>210</y>
+     <y>230</y>
      <width>101</width>
      <height>29</height>
     </rect>
@@ -30,7 +30,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>210</y>
+     <y>230</y>
      <width>106</width>
      <height>29</height>
     </rect>
@@ -43,7 +43,7 @@
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>210</y>
+     <y>230</y>
      <width>106</width>
      <height>29</height>
     </rect>
@@ -56,7 +56,7 @@
    <property name="geometry">
     <rect>
      <x>-10</x>
-     <y>70</y>
+     <y>80</y>
      <width>411</width>
      <height>121</height>
     </rect>
@@ -74,11 +74,18 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>30</x>
      <y>10</y>
-     <width>381</width>
+     <width>441</width>
      <height>51</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="text">
     <string>Sistemas de administracion de peliculas y sus elencos</string>
