@@ -73,15 +73,15 @@ def checkea_director(nombre):#devuelve true si encuentra algun director del nomb
         existe=False
     return existe
   
-def recibe_dato(id,nombre, pais, fecha_nacimiento,fecha_defuncion,imagen):
+def actualiza(id,nombre, pais, fecha_nacimiento,fecha_defuncion,imagen):
    con=conectar()
    c=con.cursor()
-   sql=("UPDATE director SET nombre=?, pais=?, fecha_nacimiento=?,fecha_defuncion=?,imagen=?\
-     WHERE id =?")
-   c.execute(sql,(id, nombre, pais, fecha_nacimiento,fecha_defuncion,imagen))
-  
+   sql=('UPDATE director SET nombre="'+nombre+'", pais="'+pais+'", fecha_nacimiento="'+fecha_nacimiento+'",fecha_defuncion="'+fecha_defuncion+'",imagen="'+imagen+'"\
+     WHERE id ="'+str(id)+'"')
+   c.execute(sql)
+   con.commit()
    
 
 if __name__ == "__main__":
     #print("Recibe dato")
-    recibe_dato(5,"ale", "chile", "1992-11-26","","")
+   # recibe_dato(5,"ale", "chile", "1992-11-26","","")
