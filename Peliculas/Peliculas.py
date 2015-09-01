@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Peliculas.ui'
+# Form implementation generated from reading ui file 'Peliculas2.ui'
 #
-# Created: Sat Aug 29 23:23:48 2015
+# Created: Tue Sep  1 11:17:18 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -29,21 +29,26 @@ class Ui_Form(object):
         self.filtro_actor.setGeometry(QtCore.QRect(130, 100, 201, 27))
         self.filtro_actor.setObjectName("filtro_actor")
         self.label = QtGui.QLabel(Form)
-        self.label.setGeometry(QtCore.QRect(380, 300, 141, 17))
+        self.label.setGeometry(QtCore.QRect(370, 270, 141, 17))
         self.label.setObjectName("label")
         self.label_desc = QtGui.QLabel(Form)
-        self.label_desc.setMaximumSize(QtCore.QSize(200, 16777215))
-        self.label_desc.setGeometry(QtCore.QRect(380, 330, 141, 91))
-        self.label_desc.setObjectName("label_desc")
+        self.label_desc.setGeometry(QtCore.QRect(370, 290, 141, 131))
+        self.label_desc.setText("")
+        self.label_desc.setScaledContents(False)
+        self.label_desc.setAlignment(QtCore.Qt.AlignCenter)
         self.label_desc.setWordWrap(True)
+        self.label_desc.setObjectName("label_desc")
         self.label_reparto = QtGui.QLabel(Form)
-        self.label_reparto.setGeometry(QtCore.QRect(380, 206, 141, 81))
+        self.label_reparto.setGeometry(QtCore.QRect(370, 230, 41, 41))
+        self.label_reparto.setText("")
         self.label_reparto.setObjectName("label_reparto")
         self.label_4 = QtGui.QLabel(Form)
-        self.label_4.setGeometry(QtCore.QRect(380, 170, 131, 17))
+        self.label_4.setGeometry(QtCore.QRect(370, 210, 131, 17))
         self.label_4.setObjectName("label_4")
         self.label_imagen = QtGui.QLabel(Form)
-        self.label_imagen.setGeometry(QtCore.QRect(380, 30, 141, 121))
+        self.label_imagen.setGeometry(QtCore.QRect(380, 20, 141, 181))
+        self.label_imagen.setText("")
+        self.label_imagen.setScaledContents(True)
         self.label_imagen.setObjectName("label_imagen")
         self.grilla = QtGui.QTableView(Form)
         self.grilla.setGeometry(QtCore.QRect(10, 150, 341, 281))
@@ -59,8 +64,5 @@ class Ui_Form(object):
         self.btn_crear.setText(QtGui.QApplication.translate("Form", "Crear", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_filtro.setText(QtGui.QApplication.translate("Form", "Filtro", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("Form", "Descripcion", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_desc.setText(QtGui.QApplication.translate("Form", "TextLabel", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_reparto.setText(QtGui.QApplication.translate("Form", "TextLabel", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("Form", "Reparto", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_imagen.setText(QtGui.QApplication.translate("Form", "TextLabel", None, QtGui.QApplication.UnicodeUTF8))
 

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Actores.ui'
 #
-# Created: Sun Aug 30 02:07:47 2015
+# Created: Tue Sep  1 11:09:22 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -24,6 +24,7 @@ class Ui_Form(object):
         self.elim_actor.setObjectName("elim_actor")
         self.img_actor = QtGui.QLabel(Form)
         self.img_actor.setGeometry(QtCore.QRect(480, 150, 131, 211))
+        self.img_actor.setText("")
         self.img_actor.setScaledContents(True)
         self.img_actor.setObjectName("img_actor")
         self.tabla_actor = QtGui.QTableView(Form)
@@ -35,9 +36,8 @@ class Ui_Form(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
-        Form.setWindowTitle(QtGui.QApplication.translate("Form", "Form", None, QtGui.QApplication.UnicodeUTF8))
+        Form.setWindowTitle(QtGui.QApplication.translate("Form", "Actores", None, QtGui.QApplication.UnicodeUTF8))
         self.edit_actor.setText(QtGui.QApplication.translate("Form", "Editar", None, QtGui.QApplication.UnicodeUTF8))
         self.agre_actor.setText(QtGui.QApplication.translate("Form", "Agregar", None, QtGui.QApplication.UnicodeUTF8))
         self.elim_actor.setText(QtGui.QApplication.translate("Form", "Eliminar", None, QtGui.QApplication.UnicodeUTF8))
-        self.img_actor.setText(QtGui.QApplication.translate("Form", "img_actor", None, QtGui.QApplication.UnicodeUTF8))
 
