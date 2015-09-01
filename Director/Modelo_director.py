@@ -8,7 +8,7 @@ def conectar():
     con.row_factory = sqlite3.Row
     return con
 
-def buscar_id(num):
+def buscar_id(num):#retorna una lista con todos los valores de la fila buscada (5 en total)
 	# recibe id y devuelve arreglo con todos los datos
 	con = conectar()
 	c = con.cursor()
@@ -16,8 +16,13 @@ def buscar_id(num):
     	querry = "SELECT * FROM director WHERE id = ?"
 	resultado = c.execute(querry,[num])
 	lista = resultado.fetchall()
-	con.close()
-	return lista
+	con.close();
+    	l=["","","","",""]
+	#print(len(l))
+    	for i in range (0,5):
+        	l[i]=lista[0][i+1]
+	
+	return l
 
 
 
@@ -67,7 +72,4 @@ def checkea_director(nombre):#devuelve true si encuentra algun director del nomb
     return existe
 
 if __name__ == "__main__":
-	lista = buscar_id(2)
-	for dato in lista:
-		print(str(dato))
-
+	print(buscar_id(2))

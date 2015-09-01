@@ -29,6 +29,7 @@ class Editar(QtGui.QMainWindow):
 
     def mostrar_datos(self):#muestra los datos del director de una ID especifica en el formulario
         iD=""
+        
         pass
     
 
@@ -88,6 +89,6 @@ class Editar(QtGui.QMainWindow):
         self.ui.foto_label.setPixmap(QtGui.QPixmap("img/0.jpg"))
 
 if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)
-    main = Editar()
-    sys.exit(app.exec_())
+	app = QtGui.QApplication(sys.argv)
+	main = Editar()
+	sys.exit(app.exec_())
