@@ -53,10 +53,36 @@ def checkea_actor(nombre):#devuelve true si encuentra algun actor con el nombre 
         existe=False
     return existe
 
+def actualiza(id,nombre, birthday, genero, imagen):
+   con=conectar()
+   c=con.cursor()
+   sql=('UPDATE actor SET nombre="'+nombre+'", birthday="'+birthday+'", genero="'+genero+'",imagen="'+imagen+'"\
+     WHERE id ="'+str(id)+'"')
+   c.execute(sql)
+   con.commit()
 
 
+def buscar_id(num):#retorna una lista con todos los valores de la fila buscada (5 en total)
+	# recibe id y devuelve arreglo con todos los datos
+	con = conectar()
+	c = con.cursor()
+    	con.row_factory = sqlite3.Row
+    	querry = "SELECT * FROM actor WHERE id = ?"
+	resultado = c.execute(querry,[num])
+	lista = resultado.fetchall()
+	con.close();
+    	l=[None,None,None,None]
+	#print(len(l))
+    	for i in range (0,4):#se rellena el arreglo vacío
+        	l[i]=lista[0][i+1]
+	return l
+
+
+"""
 if __name__ == "__main__":
 
-    actores = obtener_actor()
-    for actor in actores:
-        print actor["nombre"]
+    
+    datos = buscar_id(3)
+    for dt in datos:
+        print dt
+"""
