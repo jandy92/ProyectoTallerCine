@@ -17,7 +17,7 @@ class cine(QtGui.QMainWindow):
 	self.d=Director()
 	self.a=Actores()
 	self.p=Pelicula()
-	self.show()
+	#self.show()
 	self.signals()
 
     def signals(self):
