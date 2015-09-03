@@ -27,6 +27,7 @@ class Editar(QtGui.QMainWindow):
     
     def setID(self,id):
       self.id=id
+      print(id)
       self.obtener_datos();
 
     def obtener_datos(self):

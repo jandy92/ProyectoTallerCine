@@ -36,6 +36,11 @@ class Actores(QtGui.QMainWindow):
        self.dialogo.show();
 	
     def editando(self):
+        index =self.ui.tabla_actor.currentIndex()
+        data = self.ui.tabla_actor.model()
+        mov = data.item(index.row(),0).mov
+        iD = str(mov['id'])
+        self.ed_dialogo.setID(iD)
 	self.ed_dialogo.show();
 
     def elimina(self):
@@ -184,6 +189,7 @@ class Editar(QtGui.QMainWindow):
       self.obtener_datos();
 
     def obtener_datos(self):
+        print("obtener datos")
         self.nombre=""
         self.birthday=""
 	self.genero=""

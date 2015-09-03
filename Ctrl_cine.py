@@ -5,7 +5,7 @@ from PySide import QtGui, QtCore
 from Ui_ProyectoTallerCine import Ui_Form
 from Actores.Ctrl_actores import Actores
 from Director.Controlador_director import Director
-from Peliculas.controladorPeliculas import Movies
+from Peliculas.Controlador_peliculas import Pelicula
 
 
 class cine(QtGui.QMainWindow):
@@ -16,7 +16,7 @@ class cine(QtGui.QMainWindow):
 	self.ui.setupUi(self)
 	self.d=Director()
 	self.a=Actores()
-	self.p=Movies()
+	self.p=Pelicula()
 	self.show()
 	self.signals()
 
@@ -31,7 +31,6 @@ class cine(QtGui.QMainWindow):
 	self.d.show();
     def trae_peliculas(self):
 	self.p.show();	
-
 
 
 if __name__ == '__main__':

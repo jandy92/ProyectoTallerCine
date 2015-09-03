@@ -38,6 +38,7 @@ class Movies(QtGui.QMainWindow):
         model.delete_movie(mov["nombre"])
         self.load_movies()
         return
+
     def show_poster(self, index):
         
         index = index if index is not None\
@@ -63,8 +64,9 @@ class Movies(QtGui.QMainWindow):
         movies = model.actor_count(id_p) #cambiar el nombre del model dependiendo de lo que se necesite 
         for i, mov in enumerate(movies):
             contador_actores=contador_actores+1
-        
         return(contador_actores)
+    
+    
     def load_movies(self):
         movies = model.get_movies() #cambiar el nombre del model dependiendo de lo que se necesite
         rows = len(movies)
@@ -91,7 +93,6 @@ class Movies(QtGui.QMainWindow):
     def load_filtered_movies(self):
         actor=self.ui.filtro_actor.text()
         movies = model.filter_movie(actor)
-        
         rows = len(movies)
         if rows == 0:
             QtGui.QMessageBox.information(
