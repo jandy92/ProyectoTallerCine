@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Menú Principal</string>
+   <string>Registrar usuario</string>
   </property>
   <widget class="QLabel" name="usuario">
    <property name="geometry">
@@ -30,7 +30,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>120</y>
+     <y>90</y>
      <width>81</width>
      <height>17</height>
     </rect>
@@ -53,7 +53,7 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>110</y>
+     <y>90</y>
      <width>291</width>
      <height>27</height>
     </rect>
@@ -70,6 +70,30 @@
    </property>
    <property name="text">
     <string>Ingresar</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="contrasea_2">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>140</y>
+     <width>81</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Reingresar
+contraseña</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="nueva_contrasea2_in">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>150</y>
+     <width>291</width>
+     <height>27</height>
+    </rect>
    </property>
   </widget>
  </widget>

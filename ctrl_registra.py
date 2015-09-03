@@ -11,7 +11,7 @@ class registra(QtGui.QMainWindow):
 	QtGui.QMainWindow.__init__(self, parent)
 	self.ui = Ui_Registra()
 	self.ui.setupUi(self)
-	self.show()
+	#self.show()
 	self.signals()
 
     def signals(self):
@@ -21,16 +21,32 @@ class registra(QtGui.QMainWindow):
 	#guarda nuevo usuario en base de datos
 	self.usuario = self.ui.nuevo_usuario_in.text()
 	self.clave = self.ui.nueva_contrasea_in.text()
+	self.clave2 = self.ui.nueva_contrasea2_in.text()
 	print len(self.usuario)
 	print len(self.clave)
-	if(len(self.usuario)>0 and len(self.clave)>0):
-		Modelo_registra.agrega_usuario(self.usuario, self.clave)
-		QtGui.QMessageBox.critical(self, "Se guardaron los datos","Exito:\nSe han guardado los datos correctamente.")
-		self.close()
-		self.limpiar()
+        if(len(self.usuario)>0):
+            if(len(self.clave)>0):
+                if(len(self.clave2)>0):
+                    if(self.clave==self.clave2):
+                        Modelo_registra.agrega_usuario(self.usuario, self.clave)
+                        QtGui.QMessageBox.critical(self, "Se guardaron los datos","Exito:\nSe han guardado los datos correctamente.")
+                        self.close()
+                        self.limpiar()
+                    else:
+                        QtGui.QMessageBox.critical(self, u"Contraseñas no coinciden",u"Error:\nLas contraseñas ingresadas deben ser identicas.")
+                        
+                else:
+                    QtGui.QMessageBox.critical(self, u"Ingrese una contraseña",u"Error:\nDebe ingresar una contraseña2.")
+            
+            else:
+                QtGui.QMessageBox.critical(self, u"Ingrese una contraseña",u"Error:\nDebe ingresar una contraseña.")
+        else:
+                QtGui.QMessageBox.critical(self, "Ingrese un nombre de usuario","Error:\nDebe ingresar un nombre de usuario.")	
 	
-	else:
-		QtGui.QMessageBox.critical(self, "Faltan datos","Error:\nNo ha ingresado todos los datos requeridos.")
+	
+
+
+
 
 
 

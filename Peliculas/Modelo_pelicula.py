@@ -58,8 +58,8 @@ def crear_pelicula(nombre,estreno, pais, descripcion,imagen):
     con = conectar()
     c = con.cursor()
     sql = (
-        "INSERT INTO director (nombre,estreno, pais, descripcion,imagen"
-        "VALUES (?, ?, ?, ?,?,?,?)")
+        "INSERT INTO pelicula (nombre,estreno, pais, descripcion,imagen)"
+        "VALUES (?, ?, ?, ?,?)")
     c.execute(sql,(nombre,estreno, pais, descripcion,imagen))
     con.commit()
 

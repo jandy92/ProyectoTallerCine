@@ -15,23 +15,23 @@ class Pelicula (QtGui.QMainWindow):
 	(u"Descripcion", 150))
 
     def __init__(self, parent=None):
-	QtGui.QMainWindow.__init__(self, parent)
+        QtGui.QMainWindow.__init__(self, parent)
 	self.ui = Ui_Ventana_peliculas()
 	self.ui.setupUi(self)
-	self.cargar_peliculas();
+	self.cargar_peliculas()
 	#self.show()
 	self.crear=Controlador_form_crear_pelicula()
 	#self.editar=Editar.Editar()
 	self.signals()
-	       
-    
+	
     def signals(self):
         self.ui.boton_crear_pelicula.clicked.connect(self.mostrar_ventana_agregar)
         self.ui.grilla.clicked.connect(self.mostrar_imagen)
+        self.ui.boton_eliminar_pelicula.clicked.connect(self.elimina)
+        self.crear.ui.crear_boton.clicked.connect(self.cargar_peliculas)
 
     def cargar_peliculas(self):
-            
-	peliculas=Modelo_pelicula.obtener_peliculas()
+        peliculas=Modelo_pelicula.obtener_peliculas()
 	filas=len(peliculas)
 	data = QtGui.QStandardItemModel(filas, len(self.table_columns))
 	self.ui.grilla.setModel(data)
@@ -69,34 +69,31 @@ class Pelicula (QtGui.QMainWindow):
         self.ui.label_imagen.setPixmap(img)
 
     def elimina(self):
-        pass
-        """
+                
 	index =self.ui.grilla.currentIndex()
 	data = self.ui.grilla.model()
-	dire = data.item(index.row(),0).dire
-	iD = str(dire['id'])
-	Modelo_director.borrar(iD);
-	self.cargar_directores();
+	peli = data.item(index.row(),0).peli
+	iD = str(peli['id'])
+	Modelo_pelicula.borrar(iD);
+	self.cargar_peliculas();
 	#print(str(dire['imagen'])[1:])
 	#self.ui.imagen.setPixmap(img)
-        """
-
+      
 
     def mostrar_ventana_agregar(self):
         self.crear.show()
         
     
-    def editar_director(self):
-        """
-        pass
+    def editar_pelicula(self):
+                
       	index = self.ui.grilla.currentIndex()
 	data = self.ui.grilla.model()
-	dire = data.item(index.row(),0).dire
-	id=dire['id']
+	peli = data.item(index.row(),0).peli
+	id=peli['id']
 	print(id)
 	self.editar.setID(id)
 	self.editar.show()
-	"""
+	
 
 
 if __name__ == '__main__':
