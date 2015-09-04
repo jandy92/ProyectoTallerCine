@@ -45,18 +45,15 @@ class Controlador_form_crear_pelicula(QtGui.QMainWindow):
     def crear_pelicula(self):
         
         self.obtener_datos()
-        if(Modelo_pelicula.checkea_pelicula(self.nombre)==False):#si los campos obligatorios tienen datos, se crea la pelicula
+        if(len(self.ui.nombre_in.text())>0 and len(self.ui.fecha_in.text())>0 and len(self.ui.pais_in.text())>0 and len(self.ui.descripcion_in.toPlainText())>0 and Modelo_pelicula.checkea_pelicula(self.nombre)==False):#si los campos obligatorios tienen datos, se crea la pelicula
             print("Creando nueva pelicula ...")
                            #crear_pelicula(nombre,estreno, pais, descripcion, director_id)
             Modelo_pelicula.crear_pelicula(self.nombre,self.estreno, self.pais, self.descripcion,"Peliculas/img/"+self.nombre.replace(" ","_")+".jpg")
             self.ui.foto_label.pixmap().save("Peliculas/img/"+self.nombre.replace(" ","_")+".jpg","jpg")#guarda la imagen que se selecciono a la carpeta "img"
             self.limpiar()
             self.close()
-        else:#si falta algun campo obligatorio, no se creara el nuevo director
-            if(len(self.nombre)>0):
-                QtGui.QMessageBox.critical(self, "Pelicula Existente","Error:\nLa pelicula que intenta agregar ("+self.nombre+"), ya existe en la base de datos")
-            else:
-                QtGui.QMessageBox.critical(self, 'Faltan campos obligatorios','Error:\nLos campos "nombre", "estreno","pais", "descripcion"')
+        else:#si falta algun campo obligatorio, no se creara el nuevo director           
+            QtGui.QMessageBox.critical(self, 'Faltan campos obligatorios','Error:\nLos campos "nombre", "estreno","pais y  descripcion" son campos obligatorios')
        
     def cargar_imagen(self):
         print("cargar imagen")
