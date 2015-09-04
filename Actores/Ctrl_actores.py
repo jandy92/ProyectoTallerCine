@@ -30,11 +30,10 @@ class Actores(QtGui.QMainWindow):
         self.ui.elim_actor.clicked.connect(self.elimina)
 	self.ui.agre_actor.clicked.connect(self.agregando)
 	self.ui.edit_actor.clicked.connect(self.editando)
-	self.dialogo.ui.boton_crear.clicked.connect(self.carga_actores)
+	self.ed_dialogo.ui.boton_guardar.clicked.connect(self.carga_actores)
 
     def agregando(self):
        self.dialogo.show();
-	
     def editando(self):
         index =self.ui.tabla_actor.currentIndex()
         data = self.ui.tabla_actor.model()
@@ -215,8 +214,8 @@ class Editar(QtGui.QMainWindow):
 	print("Guardando actor modificado...")
         #self.obtener_datos()
         if(len(self.ui.nombre_in.text())>0 and Modelo_actor.checkea_actor(self.nombre)==False):#si los campos obligatorios tienen datos, se crea el director
-	    self.ui.imagen_label.pixmap().save("Actor/img/"+self.nombre.replace(" ","_")+".jpg","jpg")#guarda la imagen que se selecciono a la carpeta "img"
-            Modelo_actor.actualiza(self.id,self.ui.nombre_in.text(),self.ui.nacimiento_in.date().toPython().strftime("%Y-%m-%d"),self.ui.genero.currentText(),"Actor/img/"+self.nombre.replace(" ","_")+".jpg")
+	    self.ui.imagen_label.pixmap().save("Actores/img/"+self.nombre.replace(" ","_")+".jpg","jpg")#guarda la imagen que se selecciono a la carpeta "img"
+            Modelo_actor.actualiza(self.id,self.ui.nombre_in.text(),self.ui.nacimiento_in.date().toPython().strftime("%Y-%m-%d"),self.ui.genero.currentText(),"Actores/img/"+self.nombre.replace(" ","_")+".jpg")
 	    
             self.limpiar()
             self.close()
@@ -241,7 +240,7 @@ class Editar(QtGui.QMainWindow):
 
     def limpiar(self):#"limpia" el formulario
         self.ui.nombre_in.setText("")
-        self.ui.imagen_label.setPixmap(QtGui.QPixmap("Actor/img/0.jpg"))
+        self.ui.imagen_label.setPixmap(QtGui.QPixmap("Actores/img/0.jpg"))
  
 
 
