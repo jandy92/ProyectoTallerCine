@@ -23,7 +23,7 @@ class login(QtGui.QMainWindow):
     def signals(self):
 	self.ui.boton_login.clicked.connect(self.hacer_login)
 	self.ui.boton_registrar.clicked.connect(self.hacer_registro)
-	self.diag_crea.ui.boton_ingresar.clicked.connect(self.show)
+
 
     def hacer_login(self):
 	#comprueba si el usuario y su clave coinciden con la base de datos
@@ -47,7 +47,6 @@ class login(QtGui.QMainWindow):
 
 
     def hacer_registro(self):
-        self.close()
         self.diag_crea.show()
 	
 	
