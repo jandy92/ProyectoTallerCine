@@ -31,6 +31,7 @@ class Actores(QtGui.QMainWindow):
 	self.ui.agre_actor.clicked.connect(self.agregando)
 	self.ui.edit_actor.clicked.connect(self.editando)
 	self.ed_dialogo.ui.boton_guardar.clicked.connect(self.carga_actores)
+	self.dialogo.ui.boton_crear.clicked.connect(self.carga_actores)
 
     def agregando(self):
        self.dialogo.show();
@@ -140,6 +141,8 @@ class ctrl_form_actor(QtGui.QMainWindow):
     		               
     		Modelo_actor.crear_actor(self.nombre,self.birthday,self.sexo,"Actores/img/"+self.nombre.replace(" ","_")+".jpg")
     		self.ui.imagen_label.pixmap().save("Actores/img/"+self.nombre.replace(" ","_")+".jpg","jpg")
+                self.limpiar()
+                self.close()
     	else:#si falta algun campo obligatorio, no se creara el nuevo director
     		QtGui.QMessageBox.critical(self, "No hay nombre","Error:\nNo ha ingresado ningun nombre ")
     
