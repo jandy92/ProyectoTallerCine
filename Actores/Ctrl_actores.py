@@ -48,8 +48,10 @@ class Actores(QtGui.QMainWindow):
         data = self.ui.tabla_actor.model()
         mov = data.item(index.row(),0).mov
         iD = str(mov['id'])
-        Modelo_actor.borrar(iD);
-        self.carga_actores();
+        resp = QtGui.QMessageBox.question(self, "Pregunta","Desea realmente eliminar el actor seleccionado?",QtGui.QMessageBox.Ok,QtGui.QMessageBox.No)
+        if resp == QtGui.QMessageBox.Ok:
+            Modelo_actor.borrar(iD);
+            self.carga_actores();
 
 
     def show_poster(self, index):

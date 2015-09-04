@@ -89,8 +89,10 @@ class Director(QtGui.QMainWindow):
 	data = self.ui.grilla.model()
 	dire = data.item(index.row(),0).dire
 	iD = str(dire['id'])
-	Modelo_director.borrar(iD);
-	self.cargar_directores();
+	resp = QtGui.QMessageBox.question(self, "Pregunta","Desea realmente eliminar el director seleccionado?",QtGui.QMessageBox.Ok,QtGui.QMessageBox.No)
+        if resp == QtGui.QMessageBox.Ok:
+            Modelo_director.borrar(iD);
+            self.cargar_directores();
 	#print(str(dire['imagen'])[1:])
 	#self.ui.imagen.setPixmap(img)
 

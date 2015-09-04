@@ -93,8 +93,10 @@ class Pelicula (QtGui.QMainWindow):
 	data = self.ui.grilla.model()
 	peli = data.item(index.row(),0).peli
 	iD = str(peli['id'])
-	Modelo_pelicula.borrar(iD);
-	self.cargar_peliculas();
+	resp = QtGui.QMessageBox.question(self, "Pregunta","Desea realmente eliminar la pelicula seleccionada?",QtGui.QMessageBox.Ok,QtGui.QMessageBox.No)
+        if resp == QtGui.QMessageBox.Ok:
+            Modelo_pelicula.borrar(iD);
+            self.cargar_peliculas();
 	#print(str(dire['imagen'])[1:])
 	#self.ui.imagen.setPixmap(img)
       
