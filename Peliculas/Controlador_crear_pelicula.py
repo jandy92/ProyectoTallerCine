@@ -43,9 +43,9 @@ class Controlador_form_crear_pelicula(QtGui.QMainWindow):
             self.listo=True
             
     def crear_pelicula(self):
-        
+        #self.ui.nacimiento_in.date().toPython().strftime("%Y-%m-%d")
         self.obtener_datos()
-        if(len(self.ui.nombre_in.text())>0 and len(self.ui.fecha_in.text())>0 and len(self.ui.pais_in.text())>0 and len(self.ui.descripcion_in.toPlainText())>0 and Modelo_pelicula.checkea_pelicula(self.nombre)==False):#si los campos obligatorios tienen datos, se crea la pelicula
+        if(len(self.ui.nombre_in.text())>0 and len(self.ui.fecha_in.date().toPython().strftime("%Y-%m-%d"))>0 and len(self.ui.pais_in.text())>0 and len(self.ui.descripcion_in.toPlainText())>0 and Modelo_pelicula.checkea_pelicula(self.nombre)==False):#si los campos obligatorios tienen datos, se crea la pelicula
             print("Creando nueva pelicula ...")
                            #crear_pelicula(nombre,estreno, pais, descripcion, director_id)
             Modelo_pelicula.crear_pelicula(self.nombre,self.estreno, self.pais, self.descripcion,"Peliculas/img/"+self.nombre.replace(" ","_")+".jpg")

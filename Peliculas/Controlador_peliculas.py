@@ -4,7 +4,9 @@ import sys
 from PySide import QtGui, QtCore
 from Peliculas_ui import Ui_Ventana_peliculas
 from Controlador_crear_pelicula import Controlador_form_crear_pelicula
+from Editar_pelicula import  Ui_formulario_editar
 import Modelo_pelicula
+import Editar
 
 class Pelicula (QtGui.QMainWindow):
     table_columns = (
@@ -25,10 +27,12 @@ class Pelicula (QtGui.QMainWindow):
 	#self.show()
 	self.crear=Controlador_form_crear_pelicula()
 	self.ui.reparto.setText("Cantidad de actores: ")
-	#self.editar=Editar.Editar()
+	self.editar=Editar.Editar()
 	self.signals()
 	
     def signals(self):
+        self.editar.ui.editar_boton.clicked.connect(self.cargar_peliculas)
+        self.ui.boton_editar_pelicula_.clicked.connect(self.editar_pelicula)
         self.ui.boton_crear_pelicula.clicked.connect(self.mostrar_ventana_agregar)
         self.ui.grilla.clicked.connect(self.mostrar_imagen)
         self.ui.boton_eliminar_pelicula.clicked.connect(self.elimina)

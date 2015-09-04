@@ -22,10 +22,10 @@ def buscar_id(num):#retorna una lista con todos los valores de la fila buscada (
 	resultado = c.execute(querry,[num])
 	lista = resultado.fetchall()
 	con.close();
-    	l=[None,None,None,None,None,None]
+    	l=[None,None,None,None,None,None,None]
 	#print(len(l))
-    	for i in range (0,6):#se rellena el arreglo vacío
-        	l[i]=lista[0][i+1]
+    	for i in range (0,7):#se rellena el arreglo vacío
+        	l[i]=lista[0][i]
 	return l
 
 
@@ -75,10 +75,10 @@ def checkea_pelicula(nombre):#devuelve true si encuentra alguna pelicula del nom
         existe=False
     return existe
   
-def actualiza(id,nombre,estreno, pais, descripcion, director_id,imagen):
+def actualiza(id,nombre,estreno, pais, descripcion,imagen):
    con=conectar()
    c=con.cursor()
-   sql=('UPDATE pelicula SET nombre="'+nombre+'", estreno="'+estreno+'", pais="'+pais+'",descripcion="'+descripcion+'",director_id="'+director_id+'",imagen="'+imagen+'"\
+   sql=('UPDATE pelicula SET nombre="'+nombre+'", estreno="'+estreno+'", pais="'+pais+'",descripcion="'+descripcion+'",imagen="'+imagen+'"\
      WHERE id ="'+str(id)+'"')
    c.execute(sql)
    con.commit()
