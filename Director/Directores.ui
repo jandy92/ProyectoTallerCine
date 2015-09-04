@@ -106,12 +106,40 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QLabel" name="label_numero_peli">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>60</y>
+     <width>151</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Nº peliculas dirgidas</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="cantidad_peliculas_dirigidas">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>50</y>
+     <width>81</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
   <zorder>grilla</zorder>
   <zorder>editarDirector</zorder>
   <zorder>agregarDirector</zorder>
   <zorder>eliminarDirector</zorder>
   <zorder>silla_imagen</zorder>
   <zorder>imagen</zorder>
+  <zorder>label_numero_peli</zorder>
+  <zorder>cantidad_peliculas_dirigidas</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'Directores.ui'
 #
-# Created: Mon Aug 31 11:24:03 2015
-#      by: pyside-uic 0.2.15 running on PySide 1.2.1
+# Created: Fri Sep  4 00:17:13 2015
+#      by: pyside-uic 0.2.15 running on PySide 1.2.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -39,6 +39,13 @@ class Ui_Form(object):
         self.imagen.setText("")
         self.imagen.setScaledContents(True)
         self.imagen.setObjectName("imagen")
+        self.label_numero_peli = QtGui.QLabel(Form)
+        self.label_numero_peli.setGeometry(QtCore.QRect(240, 60, 151, 21))
+        self.label_numero_peli.setObjectName("label_numero_peli")
+        self.cantidad_peliculas_dirigidas = QtGui.QLabel(Form)
+        self.cantidad_peliculas_dirigidas.setGeometry(QtCore.QRect(410, 50, 81, 41))
+        self.cantidad_peliculas_dirigidas.setText("")
+        self.cantidad_peliculas_dirigidas.setObjectName("cantidad_peliculas_dirigidas")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -48,4 +55,5 @@ class Ui_Form(object):
         self.editarDirector.setText(QtGui.QApplication.translate("Form", "Editar", None, QtGui.QApplication.UnicodeUTF8))
         self.agregarDirector.setText(QtGui.QApplication.translate("Form", "Agregar", None, QtGui.QApplication.UnicodeUTF8))
         self.eliminarDirector.setText(QtGui.QApplication.translate("Form", "Eliminar", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_numero_peli.setText(QtGui.QApplication.translate("Form", "Nº peliculas dirgidas", None, QtGui.QApplication.UnicodeUTF8))
 

@@ -24,6 +24,8 @@ class Director(QtGui.QMainWindow):
 	#self.show()
 	self.dialogo=Controlador_form_crear_director()
 	self.editar=Editar.Editar()
+	self.ui.cantidad_peliculas_dirigidas.setText("")
+	self.ui.label_numero_peli.setText("Cantidad de peliculas: ")
 	self.signals()
 	       
     
@@ -67,9 +69,20 @@ class Director(QtGui.QMainWindow):
 	    return
 	data = self.ui.grilla.model()
 	dire = data.item(index.row(),0).dire
+        peliculas=self.sum_peliculas(dire["id"])
+        peliculas=str(peliculas)
+        self.ui.cantidad_peliculas_dirigidas.setText(peliculas)
 	img = QtGui.QPixmap(str(dire['imagen']))
 	#print(str(dire['imagen'])[1:])
 	self.ui.imagen.setPixmap(img)
+	
+	
+    def sum_peliculas(self,id_p):  #recorre la query como diccionario para luego contar los actores
+            c=0
+            directores = Modelo_director.contar_peliculas(id_p) 
+            for i, peli in enumerate(directores):
+                c=c+1
+            return(c)
 
     def elimina(self):
 	index =self.ui.grilla.currentIndex()
@@ -171,6 +184,8 @@ class Controlador_form_crear_director(QtGui.QMainWindow):
         self.ui.difunto_check.setChecked(False)
         self.ui.defuncion_in.setEnabled(False)
         self.ui.foto_label.setPixmap(QtGui.QPixmap("Director/img/0.jpg"))
+        
+        
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)

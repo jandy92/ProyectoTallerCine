@@ -82,7 +82,33 @@ def actualiza(id,nombre,estreno, pais, descripcion, director_id,imagen):
      WHERE id ="'+str(id)+'"')
    c.execute(sql)
    con.commit()
-   
+  
+def filtro_pelicula(actor):
+    con = conectar()
+    c = con.cursor()
+    actor="'"+actor+"'))"
+    query = ("SELECT * FROM pelicula "
+             "WHERE ID IN (SELECT pelicula_id FROM elenco "
+             "WHERE actor_id IN "
+             "(SELECT id FROM actor "
+             "WHERE nombre="+actor+" COLLATE NOCASE"
+         )
+    result = c.execute(query)
+    peliculas = result.fetchall()
+    return peliculas  
+
+def contar_actor(id_p):
+    con = conectar()
+    c = con.cursor()
+    id_p=str(id_p)
+    id_p="'"+id_p+"'"
+    query = ("SELECT * FROM elenco "
+             "WHERE pelicula_id ="+id_p
+         )
+    result = c.execute(query)
+    peliculas = result.fetchall()
+     #recordar cambiar el nombre del retorno
+    return peliculas
 """
 if __name__ == "__main__":
     pass

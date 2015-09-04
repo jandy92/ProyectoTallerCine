@@ -22,7 +22,6 @@ class Editar(QtGui.QMainWindow):
         self.signals()
 
     def signals(self):
-        print("hola")
         self.ui.editar_boton.clicked.connect(self.crear_pelicula)
         self.ui.boton_foto.clicked.connect(self.cargar_imagen)
         self.ui.cancelar_boton.clicked.connect(self.cancelar)

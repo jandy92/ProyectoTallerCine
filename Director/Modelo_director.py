@@ -83,6 +83,19 @@ def actualiza(id,nombre, pais, fecha_nacimiento,fecha_defuncion,imagen):
    c.execute(sql)
    con.commit()
    
+def contar_peliculas(id_p):
+    con = conectar()
+    c = con.cursor()
+    id_p=str(id_p)
+    id_p="'"+id_p+"'"
+    query = ("SELECT * FROM elenco "
+             "WHERE pelicula_id ="+id_p
+         )
+    result = c.execute(query)
+    peliculas = result.fetchall()
+     #recordar cambiar el nombre del retorno
+    return peliculas
+   
 
 if __name__ == "__main__":
 	print("Recibe dato")
