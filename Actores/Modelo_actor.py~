@@ -17,6 +17,62 @@ def obtener_actor():
     con.close()
     return actores
 
+def num_peli():
+  con = conectar()
+  c = con.cursor()
+  query = "SELECT COUNT(*) FROM pelicula"
+  resultado = c.execute(query)
+  num=resultado.fetchall()
+  return num[0][0]
+
+def actuaciones(actor):
+	con = conectar()
+	c = con.cursor()
+	query = "SELECT COUNT(*) FROM elenco WHERE actor_id= ?"
+	resultado = c.execute(query, [actor])
+	num=resultado.fetchall()
+	return num[0][0]
+
+def llena_box():
+	con = conectar()
+	c = con.cursor()
+	query = "SELECT nombre FROM pelicula"
+	resultado = c.execute(query)
+	pelicula=resultado.fetchall()	
+	return pelicula
+
+def peli_id(pelicula):
+	con = conectar()
+	c = con.cursor()
+	query = ("SELECT ID FROM pelicula WHERE nombre= ?")
+	result = c.execute(query, [pelicula])
+	id = result.fetchall()
+	return id
+
+def filtro_actores(pelicula):
+	con = conectar()
+	c = con.cursor()
+	#pelicula_id = peli_id(pelicula)
+	query = ("SELECT actor_id FROM elenco WHERE pelicula_id= ?")
+	result = c.execute(query, [5])
+	actores = result.fetchall()
+	return actores  
+"""
+def filtro_pelicula(pelicula):
+    con = conectar()
+    c = con.cursor()
+    pelicula="'"+pelicula+"'))"
+    query = ("SELECT * FROM actor "
+             "WHERE ID IN (SELECT actor_id FROM elenco "
+             "WHERE pelicula_id IN "
+             "(SELECT id FROM pelicula "
+             "WHERE nombre="+pelicula+" COLLATE NOCASE"
+         )
+    result = c.execute(query)
+    actores = result.fetchall()
+    return actores  
+"""
+
 def borrar(id):
     exito = False
     con = conectar()
@@ -77,12 +133,18 @@ def buscar_id(num):#retorna una lista con todos los valores de la fila buscada (
         	l[i]=lista[0][i+1]
 	return l
 
-
 """
 if __name__ == "__main__":
+	#print filtro_pelicula("Pulp Fiction")	
+	print peli_id("Pulp Fiction")
+    	print filtro_actores("Pulp Fiction")
 
-    
-    datos = buscar_id(3)
-    for dt in datos:
-        print dt
+
 """
+
+
+
+
+
+
+
