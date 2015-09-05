@@ -9,12 +9,18 @@ import Modelo_actor
 
 
 class Actores(QtGui.QMainWindow):
+"""
+Crea una ventana
+"""
     tabla_columnas = (
         (u"Nombre", 200),
         (u"Birtday", 150),
         (u"Genero", 150))
 
     def __init__(self, parent=None):
+"""
+metodo constructor
+"""
         QtGui.QMainWindow.__init__(self, parent)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
@@ -27,6 +33,9 @@ class Actores(QtGui.QMainWindow):
 
     
     def set_box(self):
+"""
+Rellena el combobox con peliculas
+"""
     	self.i = Modelo_actor.num_peli()
     	self.ui.filtro_box.setMaxCount(self.i)
     	self.peli = Modelo_actor.llena_box()
@@ -36,6 +45,9 @@ class Actores(QtGui.QMainWindow):
             self.ui.filtro_box.addItem(self.peli[itm][0])
 
     def signals(self):
+"""
+define el manejo de señales
+"""
         self.ui.tabla_actor.clicked.connect(self.show_poster)
         self.ui.elim_actor.clicked.connect(self.elimina)
 	self.ui.agre_actor.clicked.connect(self.agregando)
@@ -45,8 +57,14 @@ class Actores(QtGui.QMainWindow):
 	self.dialogo.ui.boton_crear.clicked.connect(self.carga_actores)
 
     def agregando(self):
+"""
+abre la ventana para agregar un nuevo actor
+"""
     	self.dialogo.show();
     def editando(self):
+"""
+abre ventana para editar 
+"""
         index =self.ui.tabla_actor.currentIndex()
         data = self.ui.tabla_actor.model()
         mov = data.item(index.row(),0).mov
@@ -54,46 +72,7 @@ class Actores(QtGui.QMainWindow):
         self.ed_dialogo.setID(iD)
         self.ed_dialogo.show();
 
-    def filtrando(self):
-        self.peliculas = self.ui.filtro_box.currentText()
-	self.actores = Modelo_actor.filtro_actor(self.peliculas)
-	print("***********")
-	print(self.actores)
-	print("***********")
-        rows = len(self.actores)
-        if rows == 0:
-            QtGui.QMessageBox.information(
-                None,
-                u"Información",
-                u"No se encontro nigun actor para esta pelicula.")
-            return
-        
-	data = QtGui.QStandardItemModel(
-            rows, len(self.tabla_columnas))
-        self.ui.tabla_actor.setModel(data)
-        self.ui.tabla_actor.horizontalHeader().setResizeMode(
-            0, self.ui.tabla_actor.horizontalHeader().Stretch)
 
-        for col, h in enumerate(self.tabla_columnas):
-            data.setHeaderData(col, QtCore.Qt.Horizontal, h[0])
-            self.ui.tabla_actor.setColumnWidth(col, h[1])
-	
-	for i in range(0,len(self.actores)):
-		row = [mov["nombre"], mov["birthday"], mov["genero"]]
-			for j in range (0,3)
-				pass
-		
-		
-	"""
-        for i, mov in enumerate(self.actores):
-            row = [
-                mov["nombre"], mov["birthday"], mov["genero"]]
-            for j, field in enumerate(row):
-                index = data.index(i, j, QtCore.QModelIndex())
-                data.setData(index, Modelo_actor.obtener_info_actor(actor[j][0]))
-	"""	
-            # Parametros ocultos
-            #data.item(i).mov = mov
 
     
     def elimina(self):
@@ -131,7 +110,36 @@ class Actores(QtGui.QMainWindow):
         img = QtGui.QPixmap(str(mov['imagen']))
         #print str(mov['imagen'])
         self.ui.img_actor.setPixmap(img)
+        
+        
+    def filtrando(self):
+        self.peliculas = self.ui.filtro_box.currentText()
+	self.actores = Modelo_actor.filtro_actor(self.peliculas)
+	print(self.actores)
+	
+        rows = len(self.actores)
+        
+        if rows == 0:
+            QtGui.QMessageBox.information(None,u"Información",u"No se encontro nigun actor para esta pelicula.")
+            return
+	
+	data = QtGui.QStandardItemModel(rows, len(self.tabla_columnas))
+        self.ui.tabla_actor.setModel(data)
+        self.ui.tabla_actor.horizontalHeader().setResizeMode(0, self.ui.tabla_actor.horizontalHeader().Stretch)
 
+        for col, h in enumerate(self.tabla_columnas):
+	  data.setHeaderData(col, QtCore.Qt.Horizontal, h[0])
+	  self.ui.tabla_actor.setColumnWidth(col, h[1])
+	
+        for i, mov in enumerate(self.actores):
+            row = [
+                mov["nombre"], mov["birthday"], mov["genero"],
+                mov["imagen"]]
+            for j, field in enumerate(row):
+                index = data.index(i, j, QtCore.QModelIndex())
+                data.setData(index, field)
+            # Parametros ocultos
+            data.item(i).mov = mov
 
     def carga_actores(self):
         actores = Modelo_actor.obtener_actor()

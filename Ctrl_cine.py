@@ -29,11 +29,11 @@ class cine(QtGui.QMainWindow):
 	self.ui.Peliculas.clicked.connect(self.trae_peliculas)
 
     def trae_actores(self):
-	self.a.show();
+      self.a.show();
     def trae_director(self):
-	self.d.show();
+      self.d.show();
     def trae_peliculas(self):
-	self.p.show();	
+      self.p.show();	
 
 
 if __name__ == '__main__':

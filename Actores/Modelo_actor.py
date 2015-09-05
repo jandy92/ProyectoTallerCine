@@ -4,11 +4,17 @@
 import sqlite3
 
 def conectar():
+    """
+    se conecta con la base de datos
+    """
     con = sqlite3.connect('ProyectoCine.db')
     con.row_factory = sqlite3.Row
     return con
 
 def obtener_actor():
+    """
+    obtiene todos los actores de la base de datos
+    """
     con = conectar()
     c = con.cursor()
     query = "SELECT * FROM actor"
@@ -18,6 +24,9 @@ def obtener_actor():
     return actores
 
 def num_peli():
+  """
+  cuenta la cantidad de peliculas
+  """
   con = conectar()
   c = con.cursor()
   query = "SELECT COUNT(*) FROM pelicula"
@@ -26,6 +35,9 @@ def num_peli():
   return num[0][0]
 
 def actuaciones(actor):
+	"""
+	cuenta la candidad de peliculas en las que se actuado un actor
+	"""  
 	con = conectar()
 	c = con.cursor()
 	query = "SELECT COUNT(*) FROM elenco WHERE actor_id= ?"
@@ -34,6 +46,9 @@ def actuaciones(actor):
 	return num[0][0]
 
 def llena_box():
+	"""
+	retorna un arreglo con los nombres de las peliculas que hay en la base de datos
+	"""
 	con = conectar()
 	c = con.cursor()
 	query = "SELECT nombre FROM pelicula"
@@ -42,6 +57,9 @@ def llena_box():
 	return pelicula
 
 def peli_id(pelicula):
+	"""
+	retorna la id de una pelicula pedida
+	"""
 	con = conectar()
 	c = con.cursor()
 	#query=("SELECT id FROM pelicula")
@@ -52,6 +70,9 @@ def peli_id(pelicula):
 	return id[0][0]
 
 def filtro_actor(pelicula):
+	"""
+	retorna un arreglo con la informacion de los actores
+	"""
 	con = conectar()
 	c = con.cursor()
 	pelicula_id = peli_id(pelicula)
@@ -92,6 +113,9 @@ def filtro_pelicula(pelicula):
 """
 
 def borrar(id):
+    """
+    borra un actor de la base de datos
+    """
     exito = False
     con = conectar()
     c = con.cursor()
@@ -107,6 +131,9 @@ def borrar(id):
     return exito
 
 def crear_actor(nombre, birthday, genero,imagen):
+    """
+    crea un actor en la base de datos con los datos entregados
+    """
     con = conectar()
     c = con.cursor()
     sql = (
@@ -115,7 +142,10 @@ def crear_actor(nombre, birthday, genero,imagen):
     c.execute(sql, (nombre, birthday, genero,imagen))
     con.commit()
 
-def checkea_actor(nombre):#devuelve true si encuentra algun actor con el nombre recibido como parametro, false si no.
+def checkea_actor(nombre):
+    """ 
+    devuelve true si encuentra algun actor con el nombre recibido como parametro, false si no.
+    """
     existe=True
     con=conectar()
     c=con.cursor()
@@ -128,6 +158,9 @@ def checkea_actor(nombre):#devuelve true si encuentra algun actor con el nombre 
     return existe
 
 def actualiza(id,nombre, birthday, genero, imagen):
+   """
+   actualiza el actor en la base de datos
+   """
    con=conectar()
    c=con.cursor()
    sql=('UPDATE actor SET nombre="'+nombre+'", birthday="'+birthday+'", genero="'+genero+'",imagen="'+imagen+'"\
@@ -136,8 +169,11 @@ def actualiza(id,nombre, birthday, genero, imagen):
    con.commit()
 
 
-def buscar_id(num):#retorna una lista con todos los valores de la fila buscada (5 en total)
-	# recibe id y devuelve arreglo con todos los datos
+def buscar_id(num):
+	"""
+	retorna una lista con todos los valores de la fila buscada (5 en total)
+	recibe id y devuelve arreglo con todos los datos
+	"""
 	con = conectar()
 	c = con.cursor()
     	con.row_factory = sqlite3.Row
@@ -151,14 +187,14 @@ def buscar_id(num):#retorna una lista con todos los valores de la fila buscada (
         	l[i]=lista[0][i+1]
 	return l
 
-""
+"""
 if __name__ == "__main__":
 	#print filtro_pelicula("Pulp Fiction")	
 	print peli_id('Lucy')
     	print filtro_actores('Lucy')
 
 
-""
+"""
 
 
 

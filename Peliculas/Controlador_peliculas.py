@@ -10,11 +10,11 @@ import Editar
 
 class Pelicula (QtGui.QMainWindow):
     table_columns = (
-	(u"ID",0),
+	
 	(u"Nombre", 150),
 	(u"Estreno", 150),
 	(u"Pais", 150),
-	(u"Descripcion", 150))
+	)
 
     def __init__(self, parent=None):
         QtGui.QMainWindow.__init__(self, parent)
@@ -57,7 +57,7 @@ class Pelicula (QtGui.QMainWindow):
 	    self.ui.grilla.setColumnWidth(col, h[1])
 	    
 	for i, peli in enumerate(peliculas):
-	    filas = [peli["id"],
+	    filas = [
 	        peli["nombre"], peli["estreno"],
 	        peli["pais"],peli["descripcion"],peli["director_id"]]
 	    for j, field in enumerate(filas):
