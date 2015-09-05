@@ -48,7 +48,7 @@ def peli_id(pelicula):
 	result = c.execute(query, [pelicula])
 	id = result.fetchall()
 	return id
-
+"""
 def filtro_actores(pelicula):
 	con = conectar()
 	c = con.cursor()
@@ -57,20 +57,6 @@ def filtro_actores(pelicula):
 	result = c.execute(query, [5])
 	actores = result.fetchall()
 	return actores  
-"""
-def filtro_pelicula(pelicula):
-    con = conectar()
-    c = con.cursor()
-    pelicula="'"+pelicula+"'))"
-    query = ("SELECT * FROM actor "
-             "WHERE ID IN (SELECT actor_id FROM elenco "
-             "WHERE pelicula_id IN "
-             "(SELECT id FROM pelicula "
-             "WHERE nombre="+pelicula+" COLLATE NOCASE"
-         )
-    result = c.execute(query)
-    actores = result.fetchall()
-    return actores  
 """
 
 def borrar(id):
