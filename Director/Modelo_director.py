@@ -13,8 +13,11 @@ def conectar():
     con.row_factory = sqlite3.Row
     return con
 
-def buscar_id(num):#retorna una lista con todos los valores de la fila buscada (5 en total)
-	# recibe id y devuelve arreglo con todos los datos
+def buscar_id(num):
+        """
+        Retorna una lista con todos los valores de la fila buscada (5 en total)
+        Recibe id y devuelve arreglo con todos los datos
+        """
 	con = conectar()
 	c = con.cursor()
     	con.row_factory = sqlite3.Row
@@ -31,6 +34,9 @@ def buscar_id(num):#retorna una lista con todos los valores de la fila buscada (
 
 
 def obtener_directores():
+    """
+    Obtiene todos los directores con una query
+    """
     con = conectar()
     c = con.cursor()
     query = "SELECT * FROM director"
@@ -40,6 +46,9 @@ def obtener_directores():
     return directores
 
 def borrar(id):
+    """
+    Borra un director de la base de datos
+    """
     exito = False
     con = conectar()
     c = con.cursor()
@@ -55,6 +64,9 @@ def borrar(id):
     return exito
 
 def crear_director(nombre, pais, fecha_nacimiento,fecha_defuncion,imagen):
+    """
+    Crea un director en la base de datos
+    """
     con = conectar()
     c = con.cursor()
     sql = (
@@ -63,7 +75,10 @@ def crear_director(nombre, pais, fecha_nacimiento,fecha_defuncion,imagen):
     c.execute(sql, (nombre, pais, fecha_nacimiento,fecha_defuncion,imagen))
     con.commit()
 
-def checkea_director(nombre):#devuelve true si encuentra algun director del nombre recibido como parametro, false si no.
+def checkea_director(nombre):
+    """
+    Devuelve true si encuentra algun director del nombre recibido como parametro, false si no.
+    """
     existe=True
     con=conectar()
     c=con.cursor()
@@ -76,6 +91,9 @@ def checkea_director(nombre):#devuelve true si encuentra algun director del nomb
     return existe
   
 def actualiza(id,nombre, pais, fecha_nacimiento,fecha_defuncion,imagen):
+   """
+   Actualiza una fila con los datos que recibe del usuario
+   """
    con=conectar()
    c=con.cursor()
    sql=('UPDATE director SET nombre="'+nombre+'", pais="'+pais+'", fecha_nacimiento="'+fecha_nacimiento+'",fecha_defuncion="'+fecha_defuncion+'",imagen="'+imagen+'"\
@@ -84,6 +102,10 @@ def actualiza(id,nombre, pais, fecha_nacimiento,fecha_defuncion,imagen):
    con.commit()
    
 def contar_peliculas(id_p):
+    """
+    Cuenta la cantidad de peliculas que ha hecho
+    ese director especifico buscando su id en elenco
+    """
     con = conectar()
     c = con.cursor()
     id_p=str(id_p)

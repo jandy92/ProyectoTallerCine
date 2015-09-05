@@ -21,6 +21,9 @@ class Controlador_form_crear_pelicula(QtGui.QMainWindow):
         self.listo=False
 
     def signals(self):
+        """
+        Conecta la base de datos con el codigo
+        """
         self.ui.crear_boton.clicked.connect(self.crear_pelicula)
         self.ui.boton_foto.clicked.connect(self.cargar_imagen)
         self.ui.cancelar_boton.clicked.connect(self.cancelar)
@@ -28,6 +31,9 @@ class Controlador_form_crear_pelicula(QtGui.QMainWindow):
 
 
     def obtener_datos(self):
+        """
+        Retorna los datos de una pelicula con la id que recibe
+        """
     
         self.nombre=""
         self.imagen=""
@@ -43,7 +49,9 @@ class Controlador_form_crear_pelicula(QtGui.QMainWindow):
             self.listo=True
             
     def crear_pelicula(self):
-        #self.ui.nacimiento_in.date().toPython().strftime("%Y-%m-%d")
+        """
+        Crea una nueva pelicula en la base de datos
+        """
         self.obtener_datos()
         if(len(self.ui.nombre_in.text())>0 and len(self.ui.fecha_in.date().toPython().strftime("%Y-%m-%d"))>0 and len(self.ui.pais_in.text())>0 and len(self.ui.descripcion_in.toPlainText())>0 and Modelo_pelicula.checkea_pelicula(self.nombre)==False):#si los campos obligatorios tienen datos, se crea la pelicula
             print("Creando nueva pelicula ...")
@@ -56,6 +64,9 @@ class Controlador_form_crear_pelicula(QtGui.QMainWindow):
             QtGui.QMessageBox.critical(self, 'Faltan campos obligatorios','Error:\nLos campos "nombre", "estreno","pais y  descripcion" son campos obligatorios')
        
     def cargar_imagen(self):
+        """
+        Carga la imagen que es seleccionada por el usuario
+        """
         print("cargar imagen")
         fileName = QtGui.QFileDialog.getOpenFileName(self, 'Seleccione imagen de la pelicula',None,
         "Archivo de imagen (*.png *.jpg)")#se abre un dialogo con un "filtro" en que solo se muestran imagenes
@@ -63,11 +74,16 @@ class Controlador_form_crear_pelicula(QtGui.QMainWindow):
         self.ui.foto_label.setPixmap(QtGui.QPixmap(fileName[0]))
 
     def cancelar(self):
+        """
+        Limpia y cierra la ventana
+        """
 	self.limpiar()
         self.close()
 
-    def limpiar(self):#"limpia" el formulario
-       
+    def limpiar(self):
+        """
+        "limpia" el formulario
+        """
         self.ui.nombre_in.setText("")
         self.ui.pais_in.setText("")
         self.ui.descripcion_in.setText("")

@@ -9,6 +9,9 @@ def conectar():
     return con
 
 def obtener_clave(user):
+    """
+    Entrega la clave
+    """
     con = conectar()
     c = con.cursor()
     query = 'SELECT clave FROM usuarios where usuario ="'+user+'"'
@@ -18,6 +21,9 @@ def obtener_clave(user):
     return clave[0][0]
 
 def usuario_existe(user):
+    """
+    Revisa si el usuario esta en la base de datos
+    """
     existe=False
     con = conectar()
     c = con.cursor()
@@ -29,12 +35,3 @@ def usuario_existe(user):
 	if (respuesta[0][0] == user):
     		existe=True
     return existe
-
-"""
-if __name__ == '__main__':
-   esta = usuario_existe("HumbertoCampos")
-   if esta:
-	print "esta"
-   else:
-	print "nop"
-"""

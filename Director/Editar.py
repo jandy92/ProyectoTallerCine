@@ -21,6 +21,9 @@ class Editar(QtGui.QMainWindow):
         self.id=0
 
     def signals(self):
+        """
+        Conecta la base de datos con el codigo
+        """
         self.ui.boton_foto.clicked.connect(self.cargar_imagen)
         self.ui.difunto_check.clicked.connect(self.difunto_check_clicked)
         self.ui.guardar_boton.clicked.connect(self.guardar_director)
@@ -28,10 +31,16 @@ class Editar(QtGui.QMainWindow):
         self.ui.limpiar_boton.clicked.connect(self.limpiar)
     
     def setID(self,id):
-      self.id=id
-      self.obtener_datos();
+        """
+        Cambia la id en la ventana para editar
+        """
+        self.id=id
+        self.obtener_datos();
 
     def obtener_datos(self):
+        """
+        Saca los datos ingresado por el usuario
+        """
         self.nombre=""
         self.imagen=""
         self.nacimiento=""
@@ -63,6 +72,9 @@ class Editar(QtGui.QMainWindow):
 
 
     def guardar_director(self):
+        """
+        Guarda el director que esta siendo editado
+        """
 	print("Guardando director modificado...")
         #self.obtener_datos()
         if(len(self.ui.nombre_in.text())>0 and Modelo_director.checkea_director(self.nombre)==False):#si los campos obligatorios tienen datos, se crea el director
@@ -82,11 +94,17 @@ class Editar(QtGui.QMainWindow):
                 QtGui.QMessageBox.critical(self, 'Faltan campos obligatorios','Error:\nLos campos "nombre" y "fecha de nacimiento" son obligatorios')
 
 
-    def difunto_check_clicked(self):#si "difunto" esta chequeado activa el ingreso de fecha de defuncion, de lo contrario, la desactiva
+    def difunto_check_clicked(self):
+        """
+        si "difunto" esta chequeado activa el ingreso de fecha de defuncion, de lo contrario, la desactiva
+        """
         #print(self.ui.difunto_check.isChecked())
         self.ui.defuncion_in.setEnabled(self.ui.difunto_check.isChecked())
 
     def cargar_imagen(self):
+        """
+        Carga la imagen seleccionada por el usuario
+        """
         print("cargar imagen")
         fileName = QtGui.QFileDialog.getOpenFileName(self, 'Seleccione imagen de director',None,
         "Archivo de imagen (*.png *.jpg)")#se abre un dialogo con un "filtro" en que solo se muestran imagenes
@@ -94,10 +112,16 @@ class Editar(QtGui.QMainWindow):
         self.ui.foto_label.setPixmap(QtGui.QPixmap(fileName[0]))
 
     def cancelar(self):
+        """
+        Limpia y cierra la ventana
+        """
         self.close()
         self.limpiar()
 
-    def limpiar(self):#"limpia" el formulario
+    def limpiar(self):
+        """
+        "limpia" el formulario
+        """
         self.ui.nombre_in.setText("")
         self.ui.pais_in.setText("")
         self.ui.difunto_check.setChecked(False)

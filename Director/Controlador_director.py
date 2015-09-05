@@ -30,6 +30,9 @@ class Director(QtGui.QMainWindow):
 	       
     
     def signals(self):
+        """
+        Conecta la base de datos al codigo
+        """
 	self.ui.grilla.clicked.connect(self.mostrar_imagen)
 	self.ui.eliminarDirector.clicked.connect(self.elimina)
 	self.ui.agregarDirector.clicked.connect(self.mostrar_ventana_agregar)
@@ -38,6 +41,9 @@ class Director(QtGui.QMainWindow):
 	self.ui.editarDirector.clicked.connect(self.editar_director)
 
     def cargar_directores(self):
+        """
+        Carga directores de la base de datos
+        """
 	directores=Modelo_director.obtener_directores()
 	filas=len(directores)
 	data = QtGui.QStandardItemModel(filas, len(self.table_columns))
@@ -59,6 +65,9 @@ class Director(QtGui.QMainWindow):
 	    data.item(i).dire = dire
 
     def mostrar_imagen(self, index):
+        """
+        Muestra la imagen del director
+        """
 	index = index if index is not None\
 	    else self.ui.grilla.currentIndex()
 	if index.row() == -1:
@@ -77,14 +86,20 @@ class Director(QtGui.QMainWindow):
 	self.ui.imagen.setPixmap(img)
 	
 	
-    def sum_peliculas(self,id_p):  #recorre la query como diccionario para luego contar los actores
-            c=0
-            directores = Modelo_director.contar_peliculas(id_p) 
-            for i, peli in enumerate(directores):
-                c=c+1
-            return(c)
+    def sum_peliculas(self,id_p):  
+        """
+        recorre la query como diccionario para luego contar los actores
+        """
+        c=0
+        directores = Modelo_director.contar_peliculas(id_p) 
+        for i, peli in enumerate(directores):
+            c=c+1
+        return(c)
 
     def elimina(self):
+        """
+        Elimina un director de la base de datos
+        """
 	index =self.ui.grilla.currentIndex()
 	data = self.ui.grilla.model()
 	dire = data.item(index.row(),0).dire
@@ -93,8 +108,6 @@ class Director(QtGui.QMainWindow):
         if resp == QtGui.QMessageBox.Ok:
             Modelo_director.borrar(iD);
             self.cargar_directores();
-	#print(str(dire['imagen'])[1:])
-	#self.ui.imagen.setPixmap(img)
 
 
 
@@ -102,6 +115,9 @@ class Director(QtGui.QMainWindow):
        self.dialogo.show()
     
     def editar_director(self):
+        """
+        Permite editar un director de la base de datos
+        """
       	index = self.ui.grilla.currentIndex()
 	data = self.ui.grilla.model()
 	dire = data.item(index.row(),0).dire
@@ -134,11 +150,16 @@ class Controlador_form_crear_director(QtGui.QMainWindow):
         self.ui.cancelar_boton.clicked.connect(self.cancelar)
         self.ui.limpiar_boton.clicked.connect(self.limpiar)
 
-    def difunto_check_clicked(self):#si "difunto" esta chequeado activa el ingreso de fecha de defuncion, de lo contrario, la desactiva
-        #print(self.ui.difunto_check.isChecked())
+    def difunto_check_clicked(self):
+        """
+        Si "difunto" esta chequeado activa el ingreso de fecha de defuncion, de lo contrario, la desactiva
+        """
         self.ui.defuncion_in.setEnabled(self.ui.difunto_check.isChecked())
 
     def obtener_datos(self):
+        """
+        Se sacan los datos ingresados
+        """
         self.nombre=""
         self.imagen=""
         self.nacimiento=""
@@ -155,6 +176,9 @@ class Controlador_form_crear_director(QtGui.QMainWindow):
             self.listo=True
 
     def crear_director(self):
+        """
+        Ingresa al director a la base de datos
+        """
         self.obtener_datos()
         if(self.listo==True and Modelo_director.checkea_director(self.nombre)==False):#si los campos obligatorios tienen datos, se crea el director
             print("Creando nuevo director ...")
@@ -170,6 +194,9 @@ class Controlador_form_crear_director(QtGui.QMainWindow):
                 QtGui.QMessageBox.critical(self, 'Faltan campos obligatorios','Error:\nLos campos "nombre" y "fecha de nacimiento" son obligatorios')
 
     def cargar_imagen(self):
+        """
+        Carga la imagen seleccionada por el usuario en el formulario
+        """
         print("cargar imagen")
         fileName = QtGui.QFileDialog.getOpenFileName(self, 'Seleccione imagen de director',None,
         "Archivo de imagen (*.png *.jpg)")#se abre un dialogo con un "filtro" en que solo se muestran imagenes
@@ -177,10 +204,16 @@ class Controlador_form_crear_director(QtGui.QMainWindow):
         self.ui.foto_label.setPixmap(QtGui.QPixmap(fileName[0]))
 
     def cancelar(self):
+        """
+        Limpia el formulario y cierra
+        """
 	self.limpiar()
         self.close()
 
-    def limpiar(self):#"limpia" el formulario
+    def limpiar(self):
+        """
+        limpia" el formulario
+        """
         self.ui.nombre_in.setText("")
         self.ui.pais_in.setText("")
         self.ui.difunto_check.setChecked(False)

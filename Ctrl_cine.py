@@ -21,6 +21,9 @@ class cine(QtGui.QMainWindow):
 	self.signals()
 
     def signals(self):
+        """
+        Conecta la base de datos con el codigo
+        """
 	self.ui.Actores.clicked.connect(self.trae_actores)
 	self.ui.Director.clicked.connect(self.trae_director)
 	self.ui.Peliculas.clicked.connect(self.trae_peliculas)

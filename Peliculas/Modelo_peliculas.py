@@ -13,8 +13,11 @@ def conectar():
     con.row_factory = sqlite3.Row
     return con
 
-def buscar_id(num):#retorna una lista con todos los valores de la fila buscada (5 en total)
-	# recibe id y devuelve arreglo con todos los datos
+def buscar_id(num):
+        """
+        Retorna una lista con todos los valores de la fila buscada (5 en total)
+	Recibe id y devuelve arreglo con todos los datos
+	"""
 	con = conectar()
 	c = con.cursor()
     	con.row_factory = sqlite3.Row
@@ -31,6 +34,9 @@ def buscar_id(num):#retorna una lista con todos los valores de la fila buscada (
 
 
 def obtener_peliculas():
+    """
+    Obtiene todas las peliculas
+    """
     con = conectar()
     c = con.cursor()
     query = "SELECT * FROM pelicula"
@@ -40,6 +46,9 @@ def obtener_peliculas():
     return peliculas
 
 def borrar(id):
+    """
+    Borra de pelicula buscando por su id
+    """
     exito = False
     con = conectar()
     c = con.cursor()
@@ -55,6 +64,9 @@ def borrar(id):
     return exito
 
 def crear_pelicula(nombre,estreno, pais, descripcion,imagen):
+    """
+    Ingresa una pelicula en la base de datos
+    """
     con = conectar()
     c = con.cursor()
     sql = (
@@ -63,7 +75,10 @@ def crear_pelicula(nombre,estreno, pais, descripcion,imagen):
     c.execute(sql,(nombre,estreno, pais, descripcion,imagen))
     con.commit()
 
-def checkea_pelicula(nombre):#devuelve true si encuentra alguna pelicula del nombre recibido como parametro, false si no.
+def checkea_pelicula(nombre):
+    """
+    Devuelve true si encuentra alguna pelicula del nombre recibido como parametro, false si no.
+    """
     existe=True
     con=conectar()
     c=con.cursor()
@@ -76,6 +91,9 @@ def checkea_pelicula(nombre):#devuelve true si encuentra alguna pelicula del nom
     return existe
   
 def actualiza(id,nombre,estreno, pais, descripcion, director_id,imagen):
+   """
+   Actualiza la pelicula editada
+   """
    con=conectar()
    c=con.cursor()
    sql=('UPDATE pelicula SET nombre="'+nombre+'", estreno="'+estreno+'", pais="'+pais+'",descripcion="'+descripcion+'",director_id="'+director_id+'",imagen="'+imagen+'"\
@@ -83,7 +101,3 @@ def actualiza(id,nombre,estreno, pais, descripcion, director_id,imagen):
    c.execute(sql)
    con.commit()
    
-"""
-if __name__ == "__main__":
-    pass
-"""

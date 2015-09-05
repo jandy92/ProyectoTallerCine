@@ -22,16 +22,26 @@ class Editar(QtGui.QMainWindow):
         self.signals()
 
     def signals(self):
+        """
+        Conecta la base de datos con el codigo
+        """
         self.ui.editar_boton.clicked.connect(self.guardar_pelicula)
         self.ui.boton_foto.clicked.connect(self.cargar_imagen)
         self.ui.cancelar_boton.clicked.connect(self.cancelar)
         self.ui.limpiar_boton.clicked.connect(self.limpiar)
 
     def setID(self,id):
+      """
+      Establece la id a editar
+      """
       self.id=id
       self.obtener_datos();
 
     def obtener_datos(self):
+        """
+        Obtiene los datos de la pelicula
+        y los muestra en pantalla de editar
+        """
         self.nombre=""
         self.imagen=""
         self.estreno=""
@@ -56,6 +66,9 @@ class Editar(QtGui.QMainWindow):
 	  self.listo=True
 	  
     def guardar_pelicula(self):
+        """
+        Guarda la pelocula que fue editada en la base de datos
+        """
 	print("Guardando pelicula modificado...")
         #self.obtener_datos()
         if(len(self.ui.nombre_in.text())>0 and len(self.ui.fecha_in.text())>0 and len(self.ui.pais_in.text())>0 and  len(self.ui.descripcion_in.toPlainText())>0):#si los campos obligatorios tienen datos, se crea la pelicula
@@ -72,6 +85,9 @@ class Editar(QtGui.QMainWindow):
                 QtGui.QMessageBox.critical(self, 'Faltan campos obligatos campos "nombre", "estreno","pais", "descripcion" son obligatorios')
   
     def cargar_imagen(self):
+        """
+        Carga imagen de la pelicula
+        """
         print("cargar imagen")
         fileName = QtGui.QFileDialog.getOpenFileName(self, 'Seleccione una imagen de pelicula',None,
         "Archivo de imagen (*.png *.jpg)")#se abre un dialogo con un "filtro" en que solo se muestran imagenes
@@ -79,10 +95,16 @@ class Editar(QtGui.QMainWindow):
         self.ui.foto_label.setPixmap(QtGui.QPixmap(fileName[0]))
 
     def cancelar(self):
+        """
+        Limpia y cierra la ventana
+        """
         self.close()
         self.limpiar()
 
-    def limpiar(self):#"limpia" el formulario
+    def limpiar(self):
+        """
+        "limpia" el formulario
+        """
         self.ui.nombre_in.setText("")
         self.ui.pais_in.setText("")
         self.ui.descripcion_in.setText("")

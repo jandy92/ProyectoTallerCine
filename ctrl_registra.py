@@ -16,10 +16,15 @@ class registra(QtGui.QMainWindow):
 	self.signals()
 
     def signals(self):
+        """
+        Conecta la base de datos con el codigo
+        """
 	self.ui.boton_ingresar.clicked.connect(self.registrando)
 
     def registrando(self):
-	#guarda nuevo usuario en base de datos
+	"""
+	guarda nuevo usuario en base de datos
+	"""
 	registrado=False
 	self.usuario = self.ui.nuevo_usuario_in.text()
 	self.clave = self.ui.nueva_contrasea_in.text()

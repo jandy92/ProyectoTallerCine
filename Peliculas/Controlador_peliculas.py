@@ -31,6 +31,9 @@ class Pelicula (QtGui.QMainWindow):
 	self.signals()
 	
     def signals(self):
+        """
+        Conecta la base de datos con el codigo
+        """
         self.editar.ui.editar_boton.clicked.connect(self.cargar_peliculas)
         self.ui.boton_editar_pelicula_.clicked.connect(self.editar_pelicula)
         self.ui.boton_crear_pelicula.clicked.connect(self.mostrar_ventana_agregar)
@@ -40,6 +43,9 @@ class Pelicula (QtGui.QMainWindow):
         self.ui.boton_filtro_actor.clicked.connect(self.filtro_actor)
 
     def cargar_peliculas(self):
+        """
+        Muestra las peliculas en la grilla
+        """
         peliculas=Modelo_pelicula.obtener_peliculas()
 	filas=len(peliculas)
 	data = QtGui.QStandardItemModel(filas, len(self.table_columns))
@@ -62,6 +68,9 @@ class Pelicula (QtGui.QMainWindow):
 	    data.item(i).peli = peli
     
     def mostrar_imagen(self,index):
+        """
+        Muestra la imagen correspondiente a esa pelicula
+        """
         index = index if index is not None\
             else self.ui.grilla.currentIndex()
         if index.row() == -1:
@@ -81,14 +90,20 @@ class Pelicula (QtGui.QMainWindow):
         img = QtGui.QPixmap(peli['imagen'])  #str[mov[poster]] da el nombre del archivo para luego usarlo como una imagen
         self.ui.label_imagen.setPixmap(img)
     
-    def sum_actores(self,id_p):  #recorre la query como diccionario para luego contar los actores
+    def sum_actores(self,id_p):
+        """
+        recorre la query como diccionario para luego contar los actores
+        """
         c=0
         peliculas = Modelo_pelicula.contar_actor(id_p) 
         for i, peli in enumerate(peliculas):
             c=c+1
         return(c)
 
-    def elimina(self):              
+    def elimina(self):
+        """
+        Elimina una pelicula de la base de datos
+        """
 	index =self.ui.grilla.currentIndex()
 	data = self.ui.grilla.model()
 	peli = data.item(index.row(),0).peli
@@ -97,14 +112,15 @@ class Pelicula (QtGui.QMainWindow):
         if resp == QtGui.QMessageBox.Ok:
             Modelo_pelicula.borrar(iD);
             self.cargar_peliculas();
-	#print(str(dire['imagen'])[1:])
-	#self.ui.imagen.setPixmap(img)
       
 
     def mostrar_ventana_agregar(self):
         self.crear.show()
     
     def filtro_actor(self):
+        """
+        Filtra para poner la cantidad de actores de esa pelicula
+        """
         actor=self.ui.filtro_actor.text()
         peliculas = Modelo_pelicula.filtro_pelicula(actor)
         rows = len(peliculas)
@@ -135,7 +151,10 @@ class Pelicula (QtGui.QMainWindow):
             data.item(i).peli = peli
         
     
-    def editar_pelicula(self):             
+    def editar_pelicula(self):
+        """
+        Obtiene la id de pelicula seleccionada y se la pasa a la ventana de editar
+        """
       	index = self.ui.grilla.currentIndex()
 	data = self.ui.grilla.model()
 	peli = data.item(index.row(),0).peli

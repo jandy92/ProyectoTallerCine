@@ -13,8 +13,11 @@ def conectar():
     con.row_factory = sqlite3.Row
     return con
 
-def buscar_id(num):#retorna una lista con todos los valores de la fila buscada (5 en total)
-	# recibe id y devuelve arreglo con todos los datos
+def buscar_id(num):
+        """
+        retorna una lista con todos los valores de la fila buscada (5 en total)
+	recibe id y devuelve arreglo con todos los datos
+	"""
 	con = conectar()
 	c = con.cursor()
     	con.row_factory = sqlite3.Row
@@ -31,6 +34,9 @@ def buscar_id(num):#retorna una lista con todos los valores de la fila buscada (
 
 
 def obtener_peliculas():
+    """
+    Obtiene los datos de peliculas
+    """
     con = conectar()
     c = con.cursor()
     query = "SELECT * FROM pelicula"
@@ -40,6 +46,9 @@ def obtener_peliculas():
     return peliculas
 
 def borrar(id):
+    """
+    Borra de pelicula buscando la id
+    """
     exito = False
     con = conectar()
     c = con.cursor()
@@ -55,6 +64,9 @@ def borrar(id):
     return exito
 
 def crear_pelicula(nombre,estreno, pais, descripcion,imagen):
+    """
+    Inserta una pelicula nueva a la base de datos
+    """
     con = conectar()
     c = con.cursor()
     sql = (
@@ -63,7 +75,10 @@ def crear_pelicula(nombre,estreno, pais, descripcion,imagen):
     c.execute(sql,(nombre,estreno, pais, descripcion,imagen))
     con.commit()
 
-def checkea_pelicula(nombre):#devuelve true si encuentra alguna pelicula del nombre recibido como parametro, false si no.
+def checkea_pelicula(nombre):
+    """
+    Devuelve true si encuentra alguna pelicula del nombre recibido como parametro, false si no.
+    """
     existe=True
     con=conectar()
     c=con.cursor()
@@ -76,6 +91,9 @@ def checkea_pelicula(nombre):#devuelve true si encuentra alguna pelicula del nom
     return existe
   
 def actualiza(id,nombre,estreno, pais, descripcion,imagen):
+   """
+   Actualiza el valor editado por el usuario
+   """
    con=conectar()
    c=con.cursor()
    sql=('UPDATE pelicula SET nombre="'+nombre+'", estreno="'+estreno+'", pais="'+pais+'",descripcion="'+descripcion+'",imagen="'+imagen+'"\
@@ -84,6 +102,9 @@ def actualiza(id,nombre,estreno, pais, descripcion,imagen):
    con.commit()
   
 def filtro_pelicula(actor):
+    """
+    Recibe un actor mostrando todas las peliculas donde a estado ese actor
+    """
     con = conectar()
     c = con.cursor()
     actor="'"+actor+"'))"
@@ -98,6 +119,9 @@ def filtro_pelicula(actor):
     return peliculas  
 
 def contar_actor(id_p):
+    """
+    Cuenta la cantidad de actores que tiene una peliculas
+    """
     con = conectar()
     c = con.cursor()
     id_p=str(id_p)
@@ -109,7 +133,3 @@ def contar_actor(id_p):
     peliculas = result.fetchall()
      #recordar cambiar el nombre del retorno
     return peliculas
-"""
-if __name__ == "__main__":
-    pass
-"""

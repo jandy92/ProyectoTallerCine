@@ -9,6 +9,9 @@ def conectar():
     return con
 
 def agrega_usuario(nu_usuario, nu_clave):
+    """
+    Ingresa al usuario a la base de datos
+    """
     con = conectar()
     c = con.cursor()
     sql = ("INSERT INTO usuarios (usuario, clave)"
