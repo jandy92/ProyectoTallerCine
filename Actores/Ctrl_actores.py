@@ -145,7 +145,8 @@ class Actores(QtGui.QMainWindow):
                 data.setData(index, field)
             # Parametros ocultos
             data.item(i).mov = mov
-            
+
+
 
 
 class ctrl_form_actor(QtGui.QMainWindow):
