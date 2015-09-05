@@ -107,15 +107,15 @@ def filtro_pelicula(actor):
     """
     con = conectar()
     c = con.cursor()
-    actor="'"+actor+"'))"
-    query = ("SELECT * FROM pelicula "
-             "WHERE ID IN (SELECT pelicula_id FROM elenco "
-             "WHERE actor_id IN "
-             "(SELECT id FROM actor "
-             "WHERE nombre='"+actor+"' COLLATE NOCASE"
+    query = ('SELECT * FROM pelicula '
+             'WHERE ID IN (SELECT pelicula_id FROM elenco '
+             'WHERE actor_id IN '
+             '(SELECT id FROM actor '
+             'WHERE nombre="'+actor+'")) COLLATE NOCASE'
          )
     result = c.execute(query)
     peliculas = result.fetchall()
+    print peliculas
     return peliculas  
 
 def contar_actor(id_p):
