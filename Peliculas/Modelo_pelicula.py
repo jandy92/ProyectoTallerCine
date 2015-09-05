@@ -112,7 +112,7 @@ def filtro_pelicula(actor):
              "WHERE ID IN (SELECT pelicula_id FROM elenco "
              "WHERE actor_id IN "
              "(SELECT id FROM actor "
-             "WHERE nombre="+actor+" COLLATE NOCASE"
+             "WHERE nombre='"+actor+"' COLLATE NOCASE"
          )
     result = c.execute(query)
     peliculas = result.fetchall()

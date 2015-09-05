@@ -76,7 +76,7 @@ def filtro_actor(pelicula):
 	con = conectar()
 	c = con.cursor()
 	pelicula_id = peli_id(pelicula)
-	query = ("SELECT actor_id FROM elenco WHERE pelicula_id= ?")
+	query = ("SELECT actor_id FROM elenco WHERE pelicula_id= ?" )
 	result = c.execute(query, [pelicula_id])
 	actores = result.fetchall()
 	
