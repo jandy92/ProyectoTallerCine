@@ -44,18 +44,21 @@ def llena_box():
 def peli_id(pelicula):
 	con = conectar()
 	c = con.cursor()
-	query = ("SELECT ID FROM pelicula WHERE nombre= ?")
-	result = c.execute(query, [pelicula])
+	#query=("SELECT id FROM pelicula")
+	query = ('SELECT ID FROM pelicula WHERE nombre='+'"'+pelicula+'"')
+	result = c.execute(query)
 	id = result.fetchall()
-	return id
+	#print("----------------------------------"+result)
+	return id[0][0]
 
-def filtro_actores(pelicula):
+def filtro_actor(pelicula):
 	con = conectar()
 	c = con.cursor()
-	#pelicula_id = peli_id(pelicula)
+	pelicula_id = peli_id(pelicula)
 	query = ("SELECT actor_id FROM elenco WHERE pelicula_id= ?")
-	result = c.execute(query, [5])
+	result = c.execute(query, [pelicula_id])
 	actores = result.fetchall()
+	print actores
 	return actores  
 """
 def filtro_pelicula(pelicula):
@@ -133,14 +136,14 @@ def buscar_id(num):#retorna una lista con todos los valores de la fila buscada (
         	l[i]=lista[0][i+1]
 	return l
 
-"""
+""
 if __name__ == "__main__":
 	#print filtro_pelicula("Pulp Fiction")	
-	print peli_id("Pulp Fiction")
-    	print filtro_actores("Pulp Fiction")
+	print peli_id('Lucy')
+    	print filtro_actores('Lucy')
 
 
-"""
+""
 
 
 

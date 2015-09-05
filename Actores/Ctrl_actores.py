@@ -9,7 +9,6 @@ import Modelo_actor
 
 
 class Actores(QtGui.QMainWindow):
-
     tabla_columnas = (
         (u"Nombre", 200),
         (u"Birtday", 150),
@@ -41,7 +40,7 @@ class Actores(QtGui.QMainWindow):
         self.ui.elim_actor.clicked.connect(self.elimina)
 	self.ui.agre_actor.clicked.connect(self.agregando)
 	self.ui.edit_actor.clicked.connect(self.editando)
-		#self.ui.boton_filtrar.clicked.connect(self.filtrando)
+	self.ui.boton_filtrar.clicked.connect(self.filtrando)
 	self.ed_dialogo.ui.boton_guardar.clicked.connect(self.carga_actores)
 	self.dialogo.ui.boton_crear.clicked.connect(self.carga_actores)
 
@@ -55,8 +54,8 @@ class Actores(QtGui.QMainWindow):
         self.ed_dialogo.setID(iD)
         self.ed_dialogo.show();
 
-    def filtrando(self):
-        pass
+
+
     
     def elimina(self):
 	index =self.ui.tabla_actor.currentIndex()
@@ -93,7 +92,36 @@ class Actores(QtGui.QMainWindow):
         img = QtGui.QPixmap(str(mov['imagen']))
         #print str(mov['imagen'])
         self.ui.img_actor.setPixmap(img)
+        
+        
+    def filtrando(self):
+        self.peliculas = self.ui.filtro_box.currentText()
+	self.actores = Modelo_actor.filtro_actor(self.peliculas)
+	print(self.actores)
+	
+        rows = len(self.actores)
+        
+        if rows == 0:
+            QtGui.QMessageBox.information(None,u"Información",u"No se encontro nigun actor para esta pelicula.")
+            return
+	
+	data = QtGui.QStandardItemModel(rows, len(self.tabla_columnas))
+        self.ui.tabla_actor.setModel(data)
+        self.ui.tabla_actor.horizontalHeader().setResizeMode(0, self.ui.tabla_actor.horizontalHeader().Stretch)
 
+        for col, h in enumerate(self.tabla_columnas):
+	  data.setHeaderData(col, QtCore.Qt.Horizontal, h[0])
+	  self.ui.tabla_actor.setColumnWidth(col, h[1])
+	
+        for i, mov in enumerate(self.actores):
+            row = [
+                mov["nombre"], mov["birthday"], mov["genero"],
+                mov["imagen"]]
+            for j, field in enumerate(row):
+                index = data.index(i, j, QtCore.QModelIndex())
+                data.setData(index, field)
+            # Parametros ocultos
+            data.item(i).mov = mov
 
     def carga_actores(self):
         actores = Modelo_actor.obtener_actor()

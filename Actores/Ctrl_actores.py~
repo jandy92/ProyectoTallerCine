@@ -9,7 +9,6 @@ import Modelo_actor
 
 
 class Actores(QtGui.QMainWindow):
-
     tabla_columnas = (
         (u"Nombre", 200),
         (u"Birtday", 150),
@@ -28,25 +27,25 @@ class Actores(QtGui.QMainWindow):
 
     
     def set_box(self):
-      self.i = Modelo_actor.num_peli()
-      self.ui.filtro_box.setMaxCount(self.i)
-      self.peli = Modelo_actor.llena_box()
-      for itm in range(len(self.peli)):
-	#print self.peli[itm][0]
-	#print itm
-	self.ui.filtro_box.addItem(self.peli[itm][0])
+    	self.i = Modelo_actor.num_peli()
+    	self.ui.filtro_box.setMaxCount(self.i)
+    	self.peli = Modelo_actor.llena_box()
+    	for itm in range(len(self.peli)):
+            #print self.peli[itm][0]
+	    #print itm
+            self.ui.filtro_box.addItem(self.peli[itm][0])
 
     def signals(self):
         self.ui.tabla_actor.clicked.connect(self.show_poster)
         self.ui.elim_actor.clicked.connect(self.elimina)
 	self.ui.agre_actor.clicked.connect(self.agregando)
 	self.ui.edit_actor.clicked.connect(self.editando)
-	#self.ui.boton_filtrar.clicked.connect(self.filtrando)
+	self.ui.boton_filtrar.clicked.connect(self.filtrando)
 	self.ed_dialogo.ui.boton_guardar.clicked.connect(self.carga_actores)
 	self.dialogo.ui.boton_crear.clicked.connect(self.carga_actores)
 
     def agregando(self):
-       self.dialogo.show();
+    	self.dialogo.show();
     def editando(self):
         index =self.ui.tabla_actor.currentIndex()
         data = self.ui.tabla_actor.model()
@@ -54,21 +53,58 @@ class Actores(QtGui.QMainWindow):
         iD = str(mov['id'])
         self.ed_dialogo.setID(iD)
         self.ed_dialogo.show();
-"""
-    def filtrando(self):
-	self.pelicula=self.ui.filtro_box.currentText()
-	 
-"""
 
-  def elimina(self):
-    index =self.ui.tabla_actor.currentIndex()
-    data = self.ui.tabla_actor.model()
-    mov = data.item(index.row(),0).mov
-    iD = str(mov['id'])
-    resp = QtGui.QMessageBox.question(self, "Pregunta","Desea realmente eliminar el actor seleccionado?",QtGui.QMessageBox.Ok,QtGui.QMessageBox.No)
-    if resp == QtGui.QMessageBox.Ok:
-    Modelo_actor.borrar(iD);
-    self.carga_actores();
+    def filtrando(self):
+        self.peliculas = self.ui.filtro_box.currentText()
+	self.actores = Modelo_actor.filtro_actor(self.peliculas)
+	print("***********")
+	print(self.actores)
+	print("***********")
+        rows = len(self.actores)
+        if rows == 0:
+            QtGui.QMessageBox.information(
+                None,
+                u"Información",
+                u"No se encontro nigun actor para esta pelicula.")
+            return
+        
+	data = QtGui.QStandardItemModel(
+            rows, len(self.tabla_columnas))
+        self.ui.tabla_actor.setModel(data)
+        self.ui.tabla_actor.horizontalHeader().setResizeMode(
+            0, self.ui.tabla_actor.horizontalHeader().Stretch)
+
+        for col, h in enumerate(self.tabla_columnas):
+            data.setHeaderData(col, QtCore.Qt.Horizontal, h[0])
+            self.ui.tabla_actor.setColumnWidth(col, h[1])
+	
+	for i in range(0,len(self.actores)):
+		row = [mov["nombre"], mov["birthday"], mov["genero"]]
+			for j in range (0,3)
+				pass
+		
+		
+	"""
+        for i, mov in enumerate(self.actores):
+            row = [
+                mov["nombre"], mov["birthday"], mov["genero"]]
+            for j, field in enumerate(row):
+                index = data.index(i, j, QtCore.QModelIndex())
+                data.setData(index, Modelo_actor.obtener_info_actor(actor[j][0]))
+	"""	
+            # Parametros ocultos
+            #data.item(i).mov = mov
+
+    
+    def elimina(self):
+	index =self.ui.tabla_actor.currentIndex()
+	data = self.ui.tabla_actor.model()
+    	mov = data.item(index.row(),0).mov
+    	iD = str(mov['id'])
+    	resp = QtGui.QMessageBox.question(self, "Pregunta","Desea realmente eliminar el actor seleccionado?",QtGui.QMessageBox.Ok,QtGui.QMessageBox.No)
+    	if resp == QtGui.QMessageBox.Ok:
+            Modelo_actor.borrar(iD);
+            self.carga_actores();
 
 
     def show_poster(self, index):
@@ -90,7 +126,7 @@ class Actores(QtGui.QMainWindow):
 		self.ui.label_2.setText("pelicula.")
 	else:
 		self.ui.label_2.setText("peliculas.")
-       
+        
         # Ahora la imagen
         img = QtGui.QPixmap(str(mov['imagen']))
         #print str(mov['imagen'])
@@ -164,7 +200,7 @@ class ctrl_form_actor(QtGui.QMainWindow):
     def crear_actor(self):
     	self.obtener_datos()
     	if(self.listo==True and Modelo_actor.checkea_actor(self.nombre)==False):#si los campos obligatorios tienen datos, se crea el director
-    		print("Creando nuevo actor ...")
+                print("Creando nuevo actor ...")
     		               
     		Modelo_actor.crear_actor(self.nombre,self.birthday,self.sexo,"Actores/img/"+self.nombre.replace(" ","_")+".jpg")
     		self.ui.imagen_label.pixmap().save("Actores/img/"+self.nombre.replace(" ","_")+".jpg","jpg")
